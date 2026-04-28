@@ -1,6 +1,7 @@
 import random
 
 options = ("R", "P", "S")
+score = 0
 
 print("====Welcome to Rock paper Scissors game====")
 while True: #Play again Loop
@@ -40,6 +41,7 @@ while True: #Play again Loop
         print("It's a draw")
     elif (Player == "R" and Computer == "S") or (Player == "S" and Computer == "P") or (Player == "P" and Computer == "R") :
         print("You win!")
+        score += 1
     else:
         print("Computer wins!")
     
@@ -52,5 +54,6 @@ while True: #Play again Loop
             print("Please enter 'y' or 'n' only.")
     
     if choice == "n":
+        print(f"Your total score was {score}")
         print("Thanks for playing!")
         break
