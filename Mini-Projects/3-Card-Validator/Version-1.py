@@ -35,28 +35,8 @@ def sumOddDigits(cardNum):
         sumOdd += int(x)
     return sumOdd
 
-def cardType(cardNum):
-
-    length = len(cardNum)
-
-    if cardNum.startswith("4") and length in [13, 16, 19]:
-        return "Visa"
-    
-    elif (51 <= int(cardNum[:2]) <= 55 or 2221 <= int(cardNum[:4]) <= 2720) and length == 16:
-        return "MasterCard"
-    
-    elif cardNum.startswith(("34", "37")) and length == 15:
-        return "American Express"
-    
-    elif (cardNum.startswith("6011") or cardNum.startswith("65") or 644 <= int(cardNum[:3]) <= 649) and length == 16:
-        return "Discover"
-    
-    else:
-        return "Unknown"
-
 def main():
     cardNum = getValidInput()
-    cardtype = cardType(cardNum)
 
     cardNum = cardNum[::-1]    # Reverses cardNum
 
@@ -66,7 +46,5 @@ def main():
         print("Your card number is Valid!")
     else:
         print("Your card number is Invalid!")
-        
-    print(f"Your cardtype is {cardtype}")
 
 main()

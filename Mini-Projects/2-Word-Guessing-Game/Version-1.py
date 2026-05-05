@@ -41,17 +41,6 @@ def check_win(word, guesses):
 def check_loss(attempts):
     return attempts == 0
 
-def display_wrong_guesses(letter, word, wrongGuesses):
-
-    if letter in word:
-        return None
-    else:
-        wrongGuesses.append(letter)
-        print("Your wrong guesses are: ")
-        for x in wrongGuesses:
-            print(x, end="")
-        print()
-
 #====Main Game====
 
 def play_game():
@@ -69,8 +58,6 @@ def play_game():
         attempts = process_guess(letter, word, guesses, attempts)
 
         display_word(word, guesses)
-
-        display_wrong_guesses(letter, word, wrongGuesses)
 
         if check_win(word, guesses):
             print("You guessed the word!")
