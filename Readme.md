@@ -1,6 +1,6 @@
 # Python-Programs
 
-## About This Repository
+## About This Repository (All good stuff in mini-project folder)
 
 * Covers a variety of Python programs (basic → intermediate)
 * Focus on logic building and real-world problem solving
