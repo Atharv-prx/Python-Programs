@@ -242,7 +242,7 @@ def get_choice(prompt):
             value = int(input(prompt))
             if 1 <= value <=9:
                 return value
-            print("Enter a number between 1-8.")
+            print("Enter a number between 1-9.")
         except ValueError:
             print("Invalid number.")
 # ================
