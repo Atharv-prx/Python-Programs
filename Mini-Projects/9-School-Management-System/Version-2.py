@@ -194,7 +194,7 @@ def get_choice(prompt):
     while True:
         try:
             value = int(input(prompt))
-            if 1 <= value <=8:
+            if 1 <= value <=9:
                 return value
             print("Enter a number between 1-8.")
         except ValueError:
@@ -212,8 +212,8 @@ def main():
         print("5. Add Teacher")
         print("6. Remove Teacher")
         print("7. Search Teacher")
-        print("4. Show Teachers list")
-        print("8. Exit")
+        print("8. Show Teachers list")
+        print("9. Exit")
 
         choice = get_choice("\nEnter your choice: ")
 
@@ -228,10 +228,12 @@ def main():
         elif choice == 5:
             add_teachers()
         elif choice == 6:
-            search_teachers()
+            remove_teachers()
         elif choice == 7:
-            show_teachers()
+            search_teachers()
         elif choice == 8:
+            show_teachers()
+        elif choice == 9:
             print("\nGoodbye!")
             break
         else:
