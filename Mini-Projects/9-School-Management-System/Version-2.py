@@ -1,3 +1,7 @@
+#Added student search function
+#Added student remove funtion
+#Did better input validation and updated main
+
 class Person:
     def __init__(self, name, age):
         self.name = name
