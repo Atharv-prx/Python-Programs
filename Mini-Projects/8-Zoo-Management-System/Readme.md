@@ -35,7 +35,7 @@ This project started as a simple Python program to demonstrate basic Object-Orie
 * Added core features:
   * Add Animal
   * View Animals
-  * ✅earch Animal
+  * Search Animal
   * Delete Animal
 * Implemented **input validation**
 * Improved overall program flow and usability
@@ -51,11 +51,10 @@ This project started as a simple Python program to demonstrate basic Object-Orie
 
 ---
 
-## 🎯 Goal of the Project
+## Goal of the Project
 
 This project is part of a learning journey to:
 
 * Strengthen Python fundamentals
 * Practice OOP concepts
 * Build real-world style mini projects
-
