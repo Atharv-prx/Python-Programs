@@ -205,7 +205,7 @@ def add_car():
     model = get_name("Enter model name: ")
     year_of_manufacture = get_int("Enter year of manufacture: ")
     top_speed = get_float("Enter Top-Speed in Km/Hr: ")
-    vehicle_id = get_int("Enter vehicle Id: ")
+    fuel_capacity = get_float("Enter fuel capacity in Litres: ")
     #To prevent duplicate id
     while True: 
 
@@ -216,7 +216,6 @@ def add_car():
         else:
             break
 
-    fuel_capacity = get_float("Enter fuel capacity in Litres: ")
     doors_number = get_int("Enter number to doors: ")
     is_trunk_present = get_true_false("Is trunck present (true/false): ")
 
