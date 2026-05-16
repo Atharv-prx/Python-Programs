@@ -2,15 +2,12 @@
 
 Built as part of my Python learning journey.
 A console-based calculator project.
----
 
 # Features
 
 ## Arithmetic Operations
-- Addition
-- Subtraction
-- Multiplication
-- Division
+- Addition, Subtraction
+- Multiplication, Division
 - Power calculations
 
 ## Comparison Operations
@@ -42,8 +39,6 @@ A console-based calculator project.
 - Stores all calculations performed during runtime
 - Displays previous operations and results
 
----
-
 # Concepts Practiced
 
 This project helped practice and understand:
@@ -55,14 +50,9 @@ This project helped practice and understand:
 - Abstraction
 - Input Validation
 - Exception Handling
-- Menu Systems
-- Loops
-- Reusable Functions
 - Boolean Comparisons
 - In-place Operators
 - Program State Management
-
----
 
 # Magic Methods Used
 
@@ -84,8 +74,6 @@ This project helped practice and understand:
 | `__itruediv__` | In-place division |
 | `__str__` | User-friendly string output |
 | `__repr__` | Developer/debug representation |
-
----
 
 # Version History
 
