@@ -2,21 +2,15 @@
 
 Built as part of my Python learning journey.
 A console-based Vehicle Management System.
----
 
 # Features
 
-- Add Vehicles
-- Show Vehicles
+- Add Vehicles, Show Vehicles, Remove Vehicles
 - Search Vehicles using Vehicle ID
-- Remove Vehicles
 - Validation System for User Input
-- Multiple Vehicle Types
-- Shared Vehicle Management Functions
+- Multiple Vehicle Types with shared Vehicle Management Functions
 - Nested Menu System
 - Duplicate Vehicle ID Prevention
-
----
 
 # Concepts Used
 
@@ -26,29 +20,7 @@ This project helped practice and improve understanding of:
 - Inheritance
 - Polymorphism
 - Method Overriding
-- `super()`
-- Helper Functions
-- Input Validation
-- Loops
-- Conditional Statements
-- Object Storage using Lists
 - Searching & Removing Objects
-- Reusable Functions
-- Menu Systems
-- `isinstance()`
-
----
-
-# Vehicle Types
-
-This program currently supports:
-- Car
-- Bike
-- Truck
-- Electric Vehicle
-Each vehicle type inherits from the main `Vehicle` parent class.
-
----
 
 # Version History
 
@@ -58,8 +30,6 @@ Each vehicle type inherits from the main `Vehicle` parent class.
 - Simple test program for OOP structure
 - Basic inheritance and method overriding
 
----
-
 ## Version 2
 - Added user input
 - Added validation system
@@ -67,9 +37,6 @@ Each vehicle type inherits from the main `Vehicle` parent class.
 - Added:
   - Add Car
   - Show Cars
-- Added first menu system
-
----
 
 ## Version 3
 - Added:
@@ -77,8 +44,6 @@ Each vehicle type inherits from the main `Vehicle` parent class.
   - Search Vehicle
 - Created separate helper functions for validation
 - Improved overall structure
-
----
 
 ## Version 4
 - Refactored shared vehicle functions
@@ -89,8 +54,6 @@ Each vehicle type inherits from the main `Vehicle` parent class.
 - Added Vehicle ID system
 - Shared functions now work across all child classes
 
----
-
 ## Version 5 (Current Version)
 - Completed all vehicle classes
 - Added:
@@ -98,11 +61,8 @@ Each vehicle type inherits from the main `Vehicle` parent class.
   - Bike features
   - Truck features
   - Electric Vehicle features
-- Updated and expanded menu system
 - Added duplicate Vehicle ID prevention
 - Improved code organization and scalability
-
----
 
 # Improvements to be done by Future Me
 
@@ -121,4 +81,3 @@ Planned future upgrades for this project:
 - Database Integration using SQLite
 - Advanced OOP Refactoring
 - Improved Exception Handling
----

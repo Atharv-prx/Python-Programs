@@ -1,46 +1,35 @@
 # Zoo Management System (CLI)
 
-## Project Overview
+Built as part of my Python learning journey.
+A console-based Zoo Management System.
 
-This project started as a simple Python program to demonstrate basic Object-Oriented Programming (OOP) concepts like classes and inheritance. Over time, it evolved into a **menu-driven Zoo Management System** where users can interactively manage different animals.
+## Version 1
 
----
-
-### 🔹 Version 1
-
-* Basic classes (`Animals`, `Dog`, `Cat`, `Fish`)
-* Focus on **animal sounds and simple attributes**
+* Basic classes (Animals, Dog, Cat, Fish)
+* Focus on animal sounds and simple attributes
 * No user input (hardcoded data)
 
----
-
-### 🔹 Version 2
+## Version 2
 
 * Added more animal classes and attributes
-* Introduced **user input**
+* Introduced user input
 * Made the program interactive
 
----
+## Version 3
 
-### 🔹 Version 3
-
-* Implemented a **menu-driven system**
+* Implemented a menu-driven system
 * Improved structure using functions
 * Better user experience
 
----
-
-### 🔹 Version 4 (Current)
+## Version 4 (Current)
 
 * Added core features:
   * Add Animal
   * View Animals
   * Search Animal
   * Delete Animal
-* Implemented **input validation**
+* Implemented input validation
 * Improved overall program flow and usability
-
----
 
 ## Future Improvements (Next Versions)
 
@@ -48,13 +37,3 @@ This project started as a simple Python program to demonstrate basic Object-Orie
 * 🔹 Implement update/edit functionality
 * 🔹 Add file persistence (save/load data)
 * 🔹 Improve search (partial matching / filters)
-
----
-
-## Goal of the Project
-
-This project is part of a learning journey to:
-
-* Strengthen Python fundamentals
-* Practice OOP concepts
-* Build real-world style mini projects
