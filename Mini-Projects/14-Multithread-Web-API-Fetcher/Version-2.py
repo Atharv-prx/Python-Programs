@@ -13,13 +13,17 @@ def get_pokemon_info(name):
         if response.status_code == 200:           # Our response object does have a attribute of status_code
             return response.json()
         else:
-            print(f"Pokemon '{name}' not found!")
+            with print_lock:
+                print(f"Pokemon '{name}' not found!")
+                print("-" * 20)
 
     except requests.exceptions.Timeout:
-        print("The reqest took too long!")
+        with print_lock:
+            print("The reqest took too long!")
 
     except requests.exceptions.RequestException as e:
-        print(f"Error: {e}")
+        with print_lock:
+            print(f"Error: {e}")
 
 def display_pokemon_info(name):
 
@@ -27,6 +31,7 @@ def display_pokemon_info(name):
     
     if info:
         with print_lock:
+
             print(f"Name: {info['name']}")
             print(f"Height: {info['height']}")
             print(f"Weight: {info['weight']}")
