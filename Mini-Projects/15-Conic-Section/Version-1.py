@@ -44,9 +44,10 @@ def ellipse_menu():
     print("1. Find Eccentricity")
     print("2. Find Latus rectum")
     print("3. Find focal length")
-    print("4. Back to Main Menu")
+    print("4. Find Area")
+    print("6. Back to Main Menu")
 
-    return get_choice("Choose an option: ", 1, 4)
+    return get_choice("Choose an option: ", 1, 6)
 
 def get_ellipse_axes():
 
@@ -99,6 +100,17 @@ def find_ellipse_focal_length():
     print(f"Focal length: {focal_length:.4f}")
     pause()
 
+def find_ellipse_area():
+
+    a, b = get_ellipse_axes()
+
+    area = 3.14*a*b
+    print(f"Area: {area}")
+    pause
+
+def find_ellipse_directrix():
+    pass
+
 # =================
 # Main program loop
 def main():
@@ -128,6 +140,12 @@ def main():
 
                 elif ellipse_choice == 3:
                     find_ellipse_focal_length
+
+                elif ellipse_choice == 4:
+                    find_ellipse_area()
+                
+                elif ellipse_choice == 5:
+                    find_ellipse_directrix()
 
                 else:
                     break
