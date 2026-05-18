@@ -70,6 +70,21 @@ def find_ellipse_eccentricity():
     eccentricity = (1 - (b**2 / a**2)) ** 0.5
     print(f"Eccentricity: {eccentricity:.4f}")
     pause()
+
+def find_ellipse_latus_rectum():
+
+    a, b = get_ellipse_axes()
+
+    if math.isclose(a, b, rel_tol=1e-9):
+        print("This is a circle, so the latus rectum is equal to the diameter 2a.")
+        latus_rectum = 2 * a
+        print(f"Latus rectum: {latus_rectum:.4f}")
+        pause()
+
+    else:
+        latus_rectum = (2 * b**2) / a
+        print(f"Latus rectum: {latus_rectum:.4f}")
+        pause()
     
 
 # =================
@@ -97,7 +112,7 @@ def main():
                     find_ellipse_eccentricity()
 
                 elif ellipse_choice == 2:
-                    pass
+                    find_ellipse_latus_rectum()
 
                 elif ellipse_choice == 3:
                     pass
