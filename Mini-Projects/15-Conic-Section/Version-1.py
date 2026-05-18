@@ -85,7 +85,19 @@ def find_ellipse_latus_rectum():
         latus_rectum = (2 * b**2) / a
         print(f"Latus rectum: {latus_rectum:.4f}")
         pause()
+
+def find_ellipse_focal_length():
+
+    a, b = get_ellipse_axes()
+
+    if math.isclose(a, b, rel_tol=1e-9):  
+        print("This is a circle, so the focal length is 0.")
+        pause()
+        return
     
+    focal_length = (a**2 - b**2) ** 0.5
+    print(f"Focal length: {focal_length:.4f}")
+    pause()
 
 # =================
 # Main program loop
@@ -115,7 +127,7 @@ def main():
                     find_ellipse_latus_rectum()
 
                 elif ellipse_choice == 3:
-                    pass
+                    find_ellipse_focal_length
 
                 else:
                     break
