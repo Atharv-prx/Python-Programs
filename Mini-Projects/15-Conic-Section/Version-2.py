@@ -46,9 +46,13 @@ def ellipse_menu():
     print("3. Find focal length")
     print("4. Find Area")
     print("5. Find Directrix")
-    print("6. Back to Main Menu")
+    print("6. Find Focus coordinate")
+    print("7. Find major/minor axis length")
+    print("8. Vertex coordinate")
+    print("9. Find ellipse equation")
+    print("10. Back to Main Menu")
 
-    return get_choice("Choose an option: ", 1, 6)
+    return get_choice("Choose an option: ", 1, 10)
 
 def get_ellipse_axes():
 
@@ -59,6 +63,23 @@ def get_ellipse_axes():
     b = min(x, y)
 
     return a, b
+
+def get_ellipse_info():
+
+    x = get_positive_float("Enter x-axis semi-axis length: ")
+    y = get_positive_float("Enter y-axis semi-axis length: ")
+
+    if x >= y:
+        a = x
+        b = y
+        orientation = "horizontal"
+
+    else:
+        a = y
+        b = x
+        orientation = "vertical"
+
+    return a, b, orientation
 
 def find_ellipse_eccentricity():
 
@@ -124,6 +145,49 @@ def find_ellipse_directrix():
     print(f"Directrix: {directrix:.4f}")
     pause()
 
+def find_ellipse_focus_coordinate():
+
+    a, b, orientation = get_ellipse_info ()
+
+    c = (a**2 - b**2) ** 0.5
+
+    if orientation == "horizontal":
+        print(f"Focus coordinates: (±{c:.4f}, 0)")
+
+    else:
+        print(f"Focus coordinates: (0, ±{c:.4f})")
+
+    pause()
+
+def find_ellipse_major_minor_axis():
+    a, b = get_ellipse_axes()
+
+    print(f"Major axis: {2*a:.4f}")
+    print(f"Minor axis: {2*b:.4f}")
+    pause()
+
+def find_ellipse_vertex():
+    a, b, orientation = get_ellipse_info ()
+
+    if orientation == "horizontal":
+        print(f"Focus coordinates: (±{a:.4f}, 0)")
+
+    else:
+        print(f"Focus coordinates: (0, ±{a:.4f})")
+    
+    pause()
+
+def find_ellipse_equation():
+    a, b, orientation = get_ellipse_info()
+
+    if orientation == "horizontal":
+        print(f"x²/{a**2} + y²/{b**2} = 1")
+
+    else:
+        print(f"x²/{b**2} + y²/{a**2} = 1")
+    
+    pause()
+
 # =================
 # Main program loop
 def main():
@@ -133,7 +197,11 @@ def main():
     2: find_ellipse_latus_rectum,
     3: find_ellipse_focal_length,
     4: find_ellipse_area,
-    5: find_ellipse_directrix}
+    5: find_ellipse_directrix,
+    6: find_ellipse_focus_coordinate,
+    7: find_ellipse_major_minor_axis,
+    8: find_ellipse_vertex,
+    9: find_ellipse_equation}
 
     while True:
         print("\n===========================")
@@ -153,7 +221,7 @@ def main():
 
                 ellipse_choice = ellipse_menu()
 
-                if ellipse_choice == 6:
+                if ellipse_choice == 10:
                     break
 
                 ellipse_actions[ellipse_choice]()
