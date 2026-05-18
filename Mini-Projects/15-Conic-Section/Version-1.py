@@ -45,14 +45,15 @@ def ellipse_menu():
     print("2. Find Latus rectum")
     print("3. Find focal length")
     print("4. Find Area")
+    print("5. Find Directrix")
     print("6. Back to Main Menu")
 
     return get_choice("Choose an option: ", 1, 6)
 
 def get_ellipse_axes():
 
-    x = get_positive_float("Enter the length first axis (a): ")
-    y = get_positive_float("Enter the length second axis (b): ")
+    x = get_positive_float("Enter the first axis length: ")
+    y = get_positive_float("Enter the second axis length: ")
 
     a = max(x, y)
     b = min(x, y)
@@ -104,12 +105,24 @@ def find_ellipse_area():
 
     a, b = get_ellipse_axes()
 
-    area = 3.14*a*b
-    print(f"Area: {area}")
-    pause
+    area = math.pi*a*b
+    print(f"Area: {area:.4f}")
+    pause()
 
 def find_ellipse_directrix():
-    pass
+    
+    a,b = get_ellipse_axes()
+
+    if math.isclose(a, b, rel_tol=1e-9):  
+        print("This is a circle.")
+        pause()
+        return
+    
+    eccentricity = (1 - (b**2 / a**2)) ** 0.5
+    directrix = a/eccentricity
+
+    print(f"Directrix: {directrix:.4f}")
+    pause()
 
 # =================
 # Main program loop
@@ -139,7 +152,7 @@ def main():
                     find_ellipse_latus_rectum()
 
                 elif ellipse_choice == 3:
-                    find_ellipse_focal_length
+                    find_ellipse_focal_length()
 
                 elif ellipse_choice == 4:
                     find_ellipse_area()
