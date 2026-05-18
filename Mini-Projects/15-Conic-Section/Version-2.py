@@ -148,14 +148,16 @@ def main():
         choice = get_choice("Choose an option: ", 1, 5)
 
         if choice == 3:
-
-            ellipse_choice = ellipse_menu()
-
-            if ellipse_choice == 6:
-                break
-
-            ellipse_actions[ellipse_choice]()
             
+            while True: 
+
+                ellipse_choice = ellipse_menu()
+
+                if ellipse_choice == 6:
+                    break
+
+                ellipse_actions[ellipse_choice]()
+
         elif choice == 5:
             print("Exiting program.")
             break
