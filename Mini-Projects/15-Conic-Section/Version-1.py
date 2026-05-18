@@ -1,4 +1,6 @@
-# Basic structure of what program will look like
+# - Ellipse calculations
+# - Menu system
+# - Input validation
 
 import math
 # ================
