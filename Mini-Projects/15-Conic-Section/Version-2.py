@@ -1,4 +1,5 @@
 # Added dictionary dispatching
+# Also added 4 new fucntions for ellipse
 
 import math
 # ================
@@ -170,10 +171,10 @@ def find_ellipse_vertex():
     a, b, orientation = get_ellipse_info ()
 
     if orientation == "horizontal":
-        print(f"Focus coordinates: (±{a:.4f}, 0)")
+        print(f"Vertex coordinates: (±{a:.4f}, 0)")
 
     else:
-        print(f"Focus coordinates: (0, ±{a:.4f})")
+        print(f"Vertex coordinates: (0, ±{a:.4f})")
     
     pause()
 
