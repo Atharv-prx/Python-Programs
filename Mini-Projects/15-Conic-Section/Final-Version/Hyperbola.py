@@ -1,7 +1,6 @@
 from Helpers import get_choice
 from Helpers import get_positive_float
 from Helpers import pause
-from Helpers import get_float
 import math
 
 # =======================
@@ -9,8 +8,8 @@ import math
 
 def get_hyperbola_info():
 
-    x = get_positive_float("Enter x-axis semi-axis length: ")
-    y = get_positive_float("Enter y-axis semi-axis length: ")
+    a = get_positive_float("Enter transverse semi-axis length (a): ")
+    b = get_positive_float("Enter conjugate semi-axis length (b): ")
 
     orientation = input(
         "Enter orientation (horizontal/vertical): "
@@ -22,7 +21,7 @@ def get_hyperbola_info():
             "Enter orientation (horizontal/vertical): "
         ).lower()
 
-    return x, y, orientation
+    return a, b, orientation
 
 # ==============
 # Hyperbola Menu
@@ -48,15 +47,27 @@ def hyperbola_menu():
 # Hyperbola Features
 
 def find_hyperbola_eccentricity():
-    pass
+
+    a, b, _ = get_hyperbola_info()
+
+    eccentricity = (1 + (b**2 / a**2)) ** 0.5
+
+    print(f"Eccentricity: {eccentricity:.4f}")
+    pause()
 
 def find_hyperbola_latus_rectum():
-    pass
+    
+    a, b, _ = get_hyperbola_info()
+
+    latus_rectum = (2 * b**2)/a
+
+    print(f"Latus rectum: {latus_rectum:.4f}")
+    pause()
 
 def find_hyperbola_focal_length():
     pass
 
-def find_hyperbola_asymtotes():
+def find_hyperbola_asymptotes():
     pass
 
 def find_hyperbola_directrix():
@@ -84,7 +95,7 @@ def hyperbola_program():
         1: find_hyperbola_eccentricity,
         2: find_hyperbola_latus_rectum,
         3: find_hyperbola_focal_length,
-        4: find_hyperbola_asymtotes,
+        4: find_hyperbola_asymptotes,
         5: find_hyperbola_directrix,
         6: find_hyperbola_focus_coordinate,
         7: find_hyperbola_axes_length,
