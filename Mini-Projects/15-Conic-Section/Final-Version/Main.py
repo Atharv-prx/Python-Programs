@@ -1,5 +1,6 @@
 from Helpers import get_choice
 from Ellipse import ellipse_program
+from Hyperbola import hyperbola_program
 
 def main():
 
@@ -18,7 +19,10 @@ def main():
 
         if choice == 3:
             ellipse_program()
-
+        
+        elif choice ==4: 
+            hyperbola_program()
+            
         elif choice == 5:
             print("Exiting program.")
             break

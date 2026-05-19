@@ -30,3 +30,14 @@ def get_positive_float(prompt):
 
 def pause():
     input("\nPress Enter to continue...")
+
+def get_float(prompt):
+
+    while True:
+
+        try:
+            value = float(input(prompt))
+            return value
+
+        except ValueError:
+            print("Invalid number.")
