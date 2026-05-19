@@ -96,11 +96,11 @@ def find_hyperbola_directrix():
 
     if orientation == "horizontal":
         print(f"Directrix: x = ±{directrix:.4f}")
-        pause()
 
     else:
         print(f"Directrix: y = ±{directrix:.4f}")
-        pause()
+    
+    pause()
 
 def find_hyperbola_focus_coordinate():
 
@@ -142,10 +142,10 @@ def find_hyperbola_equation():
     a, b, orientation = get_hyperbola_info()
 
     if orientation == "horizontal":
-        print(f"x²/{a**2} - y²/{b**2} = 1")
+        print(f"x²/{a**2:.4f} - y²/{b**2:.4f} = 1")
 
     else:
-        print(f"y²/{a**2} - x²/{b**2} = 1")
+        print(f"y²/{a**2:.4f} - x²/{b**2:.4f} = 1")
 
     pause()
 
