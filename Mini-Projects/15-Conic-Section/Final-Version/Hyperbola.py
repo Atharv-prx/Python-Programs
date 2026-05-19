@@ -84,18 +84,35 @@ def find_hyperbola_directrix():
     directrix = a/eccentricity
 
     if orientation == "horizontal":
-        print(f"Directrix: x = {directrix:.4f}")
+        print(f"Directrix: x = ±{directrix:.4f}")
         pause()
 
     else:
-        print(f"Directrix: y = {directrix:.4f}")
+        print(f"Directrix: y = ±{directrix:.4f}")
         pause()
 
 def find_hyperbola_focus_coordinate():
-    pass
+
+    a, b, orientation = get_hyperbola_info()
+
+    c = math.sqrt(a**2 + b**2)
+
+    if orientation == "horizontal":
+        print(f"Focus coordinates: (±{c:.4f}, 0)")
+
+    else:
+        print(f"Focus coordinates: (0, ±{c:.4f})")
+
+    pause()
 
 def find_hyperbola_axes_length():
-    pass
+
+    a, b, _ = get_hyperbola_info()
+
+    print(f"Transverse axis length: {2*a:.4f}")
+    print(f"Conjugate axis length: {2*b:.4f}")
+
+    pause()
 
 def find_hyperbola_vertex():
     pass
