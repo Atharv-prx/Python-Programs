@@ -74,7 +74,18 @@ def find_hyperbola_focal_length():
     pause()
 
 def find_hyperbola_asymptotes():
-    pass
+
+    a, b, orientation = get_hyperbola_info()
+
+    if orientation == "horizontal":
+        slope = b / a
+
+    else:
+        slope = a / b
+
+    print(f"Asymptotes: y = ±{slope:.4f}x")
+
+    pause()
 
 def find_hyperbola_directrix():
     
@@ -115,10 +126,28 @@ def find_hyperbola_axes_length():
     pause()
 
 def find_hyperbola_vertex():
-    pass
+    
+    a, _, orientation = get_hyperbola_info()
+
+    if orientation == "horizontal":
+        print(f"Vertex coordinates: (±{a:.4f}, 0)")
+
+    else:
+        print(f"Vertex coordinates: (0, ±{a:.4f})")
+    
+    pause()
 
 def find_hyperbola_equation():
-    pass
+
+    a, b, orientation = get_hyperbola_info()
+
+    if orientation == "horizontal":
+        print(f"x²/{a**2} - y²/{b**2} = 1")
+
+    else:
+        print(f"y²/{a**2} - x²/{b**2} = 1")
+
+    pause()
 
 # ==================================================
 # Hyperbola Controller Function
