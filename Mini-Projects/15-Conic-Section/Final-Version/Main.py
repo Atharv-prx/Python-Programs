@@ -1,6 +1,7 @@
 from Helpers import get_choice
 from Ellipse import ellipse_program
 from Hyperbola import hyperbola_program
+from Parabola import parabola_program
 
 def main():
 
@@ -16,8 +17,11 @@ def main():
         print("5. Exit")
 
         choice = get_choice("Choose an option: ", 1, 5)
+        
+        if choice == 2:
+            parabola_program()
 
-        if choice == 3:
+        elif choice == 3:
             ellipse_program()
         
         elif choice ==4: 
