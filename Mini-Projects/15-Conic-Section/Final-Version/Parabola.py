@@ -1,7 +1,6 @@
 from Helpers import get_choice
 from Helpers import pause
 from Helpers import get_positive_float
-import math
 
 # =====================
 # Shared Parabola input
@@ -34,6 +33,7 @@ def parabola_menu():
     print("5. Back")
     
     return get_choice("Choose an option: ", 1, 5)
+
 # =================
 # Parabola Features
 

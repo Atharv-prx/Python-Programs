@@ -65,9 +65,9 @@ def find_ellipse_eccentricity():
         pause()
         return
     
-    eccentricity = (1 - (b**2 / a**2)) ** 0.5
+    eccentricity = math.sqrt(1 - (b**2 / a**2))
 
-    print(f"Eccentricity: {eccentricity:g}")
+    print(f"Eccentricity: {eccentricity:.4f}")
     pause()
 
 def find_ellipse_latus_rectum():
@@ -95,7 +95,7 @@ def find_ellipse_focal_length():
 
     focal_length = math.sqrt(a**2 - b**2)
 
-    print(f"Focal length: {focal_length:g}")
+    print(f"Focal length: {focal_length:.4f}")
     pause()
 
 def find_ellipse_area():
@@ -104,7 +104,7 @@ def find_ellipse_area():
 
     area = math.pi * a * b
 
-    print(f"Area: {area:g}")
+    print(f"Area: {area:.4f}")
     pause()
 
 def find_ellipse_directrix():
@@ -120,10 +120,10 @@ def find_ellipse_directrix():
     directrix = a / eccentricity
 
     if orientation == "horizontal":
-        print(f"Directrix: x = ±{directrix:g}")
+        print(f"Directrix: x = ±{directrix:.4f}")
 
     else:
-        print(f"Directrix: y = ±{directrix:g}")
+        print(f"Directrix: y = ±{directrix:.4f}")
 
     pause()
 

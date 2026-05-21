@@ -52,7 +52,7 @@ def find_hyperbola_eccentricity():
 
     eccentricity = math.sqrt(1 + (b**2 / a**2)) 
 
-    print(f"Eccentricity: {eccentricity:g}")
+    print(f"Eccentricity: {eccentricity:.4f}")
     pause()
 
 def find_hyperbola_latus_rectum():
@@ -70,7 +70,7 @@ def find_hyperbola_focal_length():
 
     focal_length = math.sqrt(a**2 + b**2)
 
-    print(f"Focal length: {focal_length:g}")
+    print(f"Focal length: {focal_length:.4f}")
     pause()
 
 def find_hyperbola_asymptotes():
@@ -95,10 +95,10 @@ def find_hyperbola_directrix():
     directrix = a/eccentricity
 
     if orientation == "horizontal":
-        print(f"Directrix: x = ±{directrix:g}")
+        print(f"Directrix: x = ±{directrix:.4f}")
 
     else:
-        print(f"Directrix: y = ±{directrix:g}")
+        print(f"Directrix: y = ±{directrix:.4f}")
     
     pause()
 
