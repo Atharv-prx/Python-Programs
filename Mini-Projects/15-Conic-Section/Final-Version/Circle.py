@@ -51,12 +51,24 @@ def find_circle_circumference():
     pause()
 
 def find_circle_diameter():
-    pass
 
+    radius = get_circle_radius()
+
+    diameter = radius*2
+
+    print(f"Diameter: {diameter:g}")
+
+    pause()
+    
 def find_circle_equation():
-    pass
 
-# ===
+    radius = get_circle_radius()
+
+    print(f"Equation: x² + y² = {radius**2:g}")
+
+    pause()
+
+# ==========================
 # Circle Controller function
 
 def circle_program():
