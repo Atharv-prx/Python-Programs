@@ -10,12 +10,12 @@ def get_parabola_info():
 
     a = get_positive_float("Enter focal parameter (a): ")
 
-    direction = input("Enter direction (Left/Right/Up/Down): ").lower()
+    direction = input("Enter direction of parabola opening (Left/Right/Up/Down): ").lower()
 
     while direction not in {"left", "right", "up", "down"}:
         print("Invalid direction")
 
-        direction = input("Enter direction (Left/Right/Up/Down): ").lower()
+        direction = input("Enter direction of parabola opening (Left/Right/Up/Down): ").lower()
 
     return a, direction
 
@@ -51,10 +51,10 @@ def find_parabola_focus():
     a, direction = get_parabola_info()
 
     if direction == "left":
-        print(f"Focus = (-{a},0)")
+        print(f"Focus: (-{a},0)")
 
     elif direction == "right":
-        print(f"Focus = ({a},0)")
+        print(f"Focus: ({a},0)")
 
     elif direction == "up":
         print(f"Focus: (0,{a})")
@@ -65,7 +65,22 @@ def find_parabola_focus():
     pause()
 
 def find_parabola_directrix():
-    pass
+    
+    a, direction = get_parabola_info()
+
+    if direction == "left":
+        print(f"Directrix: x = {a}")
+
+    elif direction == "right":
+        print(f"Directrix: x = -{a}")
+
+    elif direction == "up":
+        print(f"Directrix: y = -{a}")
+    
+    elif direction == "down":
+        print(f"Directrix: y = {a}")
+    
+    pause()
 
 def find_parabola_equation():
     pass
