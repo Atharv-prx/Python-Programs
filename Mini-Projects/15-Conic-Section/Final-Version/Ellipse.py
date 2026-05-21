@@ -67,7 +67,7 @@ def find_ellipse_eccentricity():
     
     eccentricity = (1 - (b**2 / a**2)) ** 0.5
 
-    print(f"Eccentricity: {eccentricity:.4f}")
+    print(f"Eccentricity: {eccentricity:g}")
     pause()
 
 def find_ellipse_latus_rectum():
@@ -75,13 +75,13 @@ def find_ellipse_latus_rectum():
     a, b, _ = get_ellipse_info()
 
     if is_circle(a, b):
-        print(f"This is a circle, so latus rectum = diameter = {2*a:.4f}")
+        print(f"This is a circle, so latus rectum = diameter = {2*a:g}")
         pause()
         return
 
     latus_rectum = (2 * b**2) / a
 
-    print(f"Latus rectum: {latus_rectum:.4f}")
+    print(f"Latus rectum: {latus_rectum:g}")
     pause()
 
 def find_ellipse_focal_length():
@@ -95,7 +95,7 @@ def find_ellipse_focal_length():
 
     focal_length = math.sqrt(a**2 - b**2)
 
-    print(f"Focal length: {focal_length:.4f}")
+    print(f"Focal length: {focal_length:g}")
     pause()
 
 def find_ellipse_area():
@@ -104,7 +104,7 @@ def find_ellipse_area():
 
     area = math.pi * a * b
 
-    print(f"Area: {area:.4f}")
+    print(f"Area: {area:g}")
     pause()
 
 def find_ellipse_directrix():
@@ -120,10 +120,10 @@ def find_ellipse_directrix():
     directrix = a / eccentricity
 
     if orientation == "horizontal":
-        print(f"Directrix: x = ±{directrix:.4f}")
+        print(f"Directrix: x = ±{directrix:g}")
 
     else:
-        print(f"Directrix: y = ±{directrix:.4f}")
+        print(f"Directrix: y = ±{directrix:g}")
 
     pause()
 
@@ -139,10 +139,10 @@ def find_ellipse_focus_coordinate():
     c = math.sqrt(a**2 - b**2)
 
     if orientation == "horizontal":
-        print(f"Focus coordinates: (±{c:.4f}, 0)")
+        print(f"Focus coordinates: (±{c:g}, 0)")
 
     else:
-        print(f"Focus coordinates: (0, ±{c:.4f})")
+        print(f"Focus coordinates: (0, ±{c:g})")
 
     pause()
 
@@ -150,8 +150,8 @@ def find_ellipse_axes_length():
 
     a, b, _ = get_ellipse_info()
 
-    print(f"Major axis length: {2*a:.4f}")
-    print(f"Minor axis length: {2*b:.4f}")
+    print(f"Major axis length: {2*a:g}")
+    print(f"Minor axis length: {2*b:g}")
 
     pause()
 
@@ -160,10 +160,10 @@ def find_ellipse_vertex():
     a, _, orientation = get_ellipse_info ()
 
     if orientation == "horizontal":
-        print(f"Vertex coordinates: (±{a:.4f}, 0)")
+        print(f"Vertex coordinates: (±{a:g}, 0)")
 
     else:
-        print(f"Vertex coordinates: (0, ±{a:.4f})")
+        print(f"Vertex coordinates: (0, ±{a:g})")
     
     pause()
 
@@ -172,7 +172,7 @@ def find_ellipse_equation():
     a, b, orientation = get_ellipse_info()
 
     if is_circle(a, b):
-        print(f"Equation: x²/{a**2:.4f} + y²/{a**2:.4f} = 1")
+        print(f"Equation: x²/{a**2:g} + y²/{a**2:g} = 1")
         pause()
         return
     

@@ -85,18 +85,20 @@ def find_parabola_directrix():
 def find_parabola_equation():
 
     a, direction = get_parabola_info()
+    
+    coefficient = 4*a
 
     if direction == "left":
-        print(f"Equation: y² = -{4*a}x")
+        print(f"Equation: y² = -{coefficient:g}x")
 
     elif direction == "right":
-        print(f"Equation: y² = {4*a}x")
+        print(f"Equation: y² = {coefficient:g}x")
 
     elif direction == "up":
-        print(f"Equation: x² = {4*a}y")
+        print(f"Equation: x² = {coefficient:g}y")
     
     elif direction == "down":
-        print(f"Equation: x² = -{4*a}y")
+        print(f"Equation: x² = -{coefficient:g}y")
     
     pause()
 

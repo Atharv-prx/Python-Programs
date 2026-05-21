@@ -52,7 +52,7 @@ def find_hyperbola_eccentricity():
 
     eccentricity = math.sqrt(1 + (b**2 / a**2)) 
 
-    print(f"Eccentricity: {eccentricity:.4f}")
+    print(f"Eccentricity: {eccentricity:g}")
     pause()
 
 def find_hyperbola_latus_rectum():
@@ -61,7 +61,7 @@ def find_hyperbola_latus_rectum():
 
     latus_rectum = (2 * b**2)/a
 
-    print(f"Latus rectum: {latus_rectum:.4f}")
+    print(f"Latus rectum: {latus_rectum:g}")
     pause()
 
 def find_hyperbola_focal_length():
@@ -70,7 +70,7 @@ def find_hyperbola_focal_length():
 
     focal_length = math.sqrt(a**2 + b**2)
 
-    print(f"Focal length: {focal_length:.4f}")
+    print(f"Focal length: {focal_length:g}")
     pause()
 
 def find_hyperbola_asymptotes():
@@ -83,7 +83,7 @@ def find_hyperbola_asymptotes():
     else:
         slope = a / b
 
-    print(f"Asymptotes: y = ±{slope:.4f}x")
+    print(f"Asymptotes: y = ±{slope:g}x")
 
     pause()
 
@@ -95,10 +95,10 @@ def find_hyperbola_directrix():
     directrix = a/eccentricity
 
     if orientation == "horizontal":
-        print(f"Directrix: x = ±{directrix:.4f}")
+        print(f"Directrix: x = ±{directrix:g}")
 
     else:
-        print(f"Directrix: y = ±{directrix:.4f}")
+        print(f"Directrix: y = ±{directrix:g}")
     
     pause()
 
@@ -109,10 +109,10 @@ def find_hyperbola_focus_coordinate():
     c = math.sqrt(a**2 + b**2)
 
     if orientation == "horizontal":
-        print(f"Focus coordinates: (±{c:.4f}, 0)")
+        print(f"Focus coordinates: (±{c:g}, 0)")
 
     else:
-        print(f"Focus coordinates: (0, ±{c:.4f})")
+        print(f"Focus coordinates: (0, ±{c:g})")
 
     pause()
 
@@ -120,8 +120,8 @@ def find_hyperbola_axes_length():
 
     a, b, _ = get_hyperbola_info()
 
-    print(f"Transverse axis length: {2*a:.4f}")
-    print(f"Conjugate axis length: {2*b:.4f}")
+    print(f"Transverse axis length: {2*a:g}")
+    print(f"Conjugate axis length: {2*b:g}")
 
     pause()
 
@@ -130,10 +130,10 @@ def find_hyperbola_vertex():
     a, _, orientation = get_hyperbola_info()
 
     if orientation == "horizontal":
-        print(f"Vertex coordinates: (±{a:.4f}, 0)")
+        print(f"Vertex coordinates: (±{a:g}, 0)")
 
     else:
-        print(f"Vertex coordinates: (0, ±{a:.4f})")
+        print(f"Vertex coordinates: (0, ±{a:g})")
     
     pause()
 
@@ -142,10 +142,10 @@ def find_hyperbola_equation():
     a, b, orientation = get_hyperbola_info()
 
     if orientation == "horizontal":
-        print(f"x²/{a**2:.4f} - y²/{b**2:.4f} = 1")
+        print(f"x²/{a**2:g} - y²/{b**2:g} = 1")
 
     else:
-        print(f"y²/{a**2:.4f} - x²/{b**2:.4f} = 1")
+        print(f"y²/{a**2:g} - x²/{b**2:g} = 1")
 
     pause()
 
