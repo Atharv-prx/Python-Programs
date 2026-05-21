@@ -44,10 +44,25 @@ def find_parabola_latus_rectum():
     LR = 4*a
 
     print(f"Length of Latus Rectum: {LR}")
-    print()
-    
+    pause()
+
 def find_parabola_focus():
-    pass
+    
+    a, direction = get_parabola_info()
+
+    if direction == "left":
+        print(f"Focus = (-{a},0)")
+
+    elif direction == "right":
+        print(f"Focus = ({a},0)")
+
+    elif direction == "up":
+        print(f"Focus: (0,{a})")
+    
+    elif direction == "down":
+        print(f"Focus: (0,-{a})")
+    
+    pause()
 
 def find_parabola_directrix():
     pass
