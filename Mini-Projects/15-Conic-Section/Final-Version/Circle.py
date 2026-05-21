@@ -1,6 +1,7 @@
 from Helpers import get_choice
 from Helpers import get_positive_float
 from Helpers import pause
+import math
 
 # ===================
 # Shared circle input
@@ -30,10 +31,24 @@ def circle_menu():
 # Circle Features
 
 def find_circle_area():
-    pass
+
+    radius = get_circle_radius()
+
+    area = math.pi * radius**2
+
+    print(f"Area: {area:.4f}")
+
+    pause()
 
 def find_circle_circumference():
-    pass
+
+    radius = get_circle_radius()
+
+    circumference = 2*math.pi*radius
+
+    print(f"Circumference: {circumference:.4f}")
+
+    pause()
 
 def find_circle_diameter():
     pass
