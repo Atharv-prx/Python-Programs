@@ -83,7 +83,22 @@ def find_parabola_directrix():
     pause()
 
 def find_parabola_equation():
-    pass
+
+    a, direction = get_parabola_info()
+
+    if direction == "left":
+        print(f"Equation: y² = -{4*a}x")
+
+    elif direction == "right":
+        print(f"Equation: y² = {4*a}x")
+
+    elif direction == "up":
+        print(f"Equation: x² = {4*a}y")
+    
+    elif direction == "down":
+        print(f"Equation: x² = -{4*a}y")
+    
+    pause()
 
 # ============================
 # Parabola Controller function
