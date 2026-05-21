@@ -38,8 +38,14 @@ def parabola_menu():
 # Parabola Features
 
 def find_parabola_latus_rectum():
-    pass
+    
+    a, direction = get_parabola_info()
 
+    LR = 4*a
+
+    print(f"Length of Latus Rectum: {LR}")
+    print()
+    
 def find_parabola_focus():
     pass
 
