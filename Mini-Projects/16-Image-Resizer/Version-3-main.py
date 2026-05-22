@@ -28,13 +28,13 @@ def resize_image(file):
 # Creating worker function
 def worker():
 
-    while q.empty():
+    while not q.empty():
 
         file = q.get()
 
         resize_image(file)
 
-        q.task_done
+        q.task_done()
 
 # Put jobs into queue
 for file in os.listdir("input"):
@@ -50,6 +50,8 @@ for i in range(4):
     threads.append(t)
 
     t.start()
+
+q.join()
 
 # Waiting for all threads
 for t in threads:
