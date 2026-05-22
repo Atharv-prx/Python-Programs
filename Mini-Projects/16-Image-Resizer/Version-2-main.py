@@ -1,6 +1,7 @@
 from PIL import Image
 import os
 import threading
+print_lock = threading.Lock()
 
 # Instead of "for file in os.listdir("input"):" we use a function, this function will process one thread at a time
 def resize_image(file):
@@ -14,8 +15,9 @@ def resize_image(file):
     output_path = f"output/{file}"
 
     img.save(output_path)
-
-    print(f"{file} resized successfully.")
+    
+    with print_lock:
+        print(f"{file} resized successfully.")
 
 # Creating threads 
 threads = []
