@@ -9,12 +9,26 @@ def get_int(prompt):
         except ValueError:
             print("Invalid number")
 
-def get_two_numbers():
-
-    num1 = get_int("Enter num 1: ")
-    num2 = get_int("Enter num 2: ")
-
-    return num1, num2
+def get_numbers():
+ 
+    while True:
+ 
+        try:
+            count = int(input("How many numbers? "))
+ 
+            if count >= 2:
+                break
+            print("Enter at least 2 numbers.")
+ 
+        except ValueError:
+            print("Invalid number.")
+ 
+    numbers = []
+ 
+    for i in range(1, count + 1):
+        numbers.append(get_int(f"Enter num {i}: "))
+ 
+    return numbers
 
 def get_choice(prompt, min_value, max_value):
 
@@ -40,23 +54,33 @@ def find_gcd(num1, num2):
     num_1 = abs(num1)
     num_2 = abs(num2)
     
-    while num_1 != 0:
+    while num_1:
 
         num_2, num_1 = num_1, num_2 % num_1
 
     return num_2
 
+def gcd_of_list(numbers):
+
+    result = numbers[0]
+
+    for n in numbers[1:]:   # [1:] is list slicing — it means "give me everything from index 1 onwards"
+        result = find_gcd(result, n)
+    return result
+
 def find_lcm(num1, num2):
     
-    a = num1
-    b = num2
-
     gcd = find_gcd(num1, num2)
 
-    lcm = abs(a*b) // gcd  # // ---> gives integer result
+    return abs(num1*num2) // gcd  # // ---> gives integer result
 
-    return lcm
+def lcm_of_list(numbers):
 
+    result = numbers[0]
+    
+    for n in numbers[1:]:
+        result = find_lcm(result, n)
+    return result
 
 def main():
 
@@ -69,28 +93,28 @@ def main():
 
         if choice == 1:
 
-            num1, num2 = get_two_numbers()
+            numbers = get_numbers()
             
-            if num1 == 0 and num2 == 0:
+            if all(n==0 for n in numbers):
                 print("GCD undefined for (0,0)")
                 pause()
                 continue
 
-            result = find_gcd(num1, num2)
+            result = gcd_of_list(numbers)
 
             print(f"GCD: {result}")
             pause()
 
         elif choice == 2:
 
-            num1, num2 = get_two_numbers()
+            numbers = get_numbers()
 
-            if num1 == 0 and num2 == 0:
+            if any(n == 0 for n in numbers):
                 print("LCM: 0")
                 pause()
                 continue
 
-            result = find_lcm(num1, num2)
+            result = lcm_of_list(numbers)
 
             print(f"LCM: {result}")
             pause()
