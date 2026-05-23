@@ -8,6 +8,11 @@ def get_int(prompt):
         except ValueError:
             print("Invalid number")
 
+def get_two_numbers():
+    num1 = get_int("Enter num 1: ")
+    num2 = get_int("Enter num 2: ")
+    return num1, num2
+
 def get_choice(prompt, min_value, max_value):
     while True:
         try:
@@ -18,8 +23,20 @@ def get_choice(prompt, min_value, max_value):
         except ValueError:
             print("Invalid number.")
 
+def pause():
+    input("\nPress Enter to continue...")
+
 def find_gcd(num1, num2):
-    pass
+    
+    # Euclidean Algorithm
+    num_1 = abs(num1)
+    num_2 = abs(num2)
+    
+    while num_1 != 0:
+
+        num_2, num_1 = num_1, num_2 % num_1
+
+    return num_2
 
 def find_lcm(num1, num2):
     pass
@@ -27,21 +44,33 @@ def find_lcm(num1, num2):
 def main():
 
     while True: 
-        print("GCD/LCM Calculator")
+        print("======= GCD/LCM Calculator =======")
         print("1. GCD")
         print("2. LCM")
         print("3. Exit")
         choice = get_choice("Enter your choice: ", 1,3)
 
         if choice == 1:
-            num1 = get_int("Enter num 1: ")
-            num2 = get_int("Enter num2: ")
-            find_gcd(num1, num2)
+
+            num1, num2 = get_two_numbers()
+            
+            if num1 == 0 and num2 == 0:
+                print("GCD undefined for (0,0)")
+                pause()
+                continue
+
+            result = find_gcd(num1, num2)
+
+            print(f"GCD: {result}")
+            pause()
 
         elif choice == 2:
-            num1 = get_int("Enter num 1: ")
-            num2 = get_int("Enter num2: ")
-            find_lcm(num1, num2)
+
+            num1, num2 = get_two_numbers()
+
+            result = find_lcm(num1, num2)
+
+            print(f"LCM: {result}")
         
         elif choice == 3:
             print("Bawwright")
