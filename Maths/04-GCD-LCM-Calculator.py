@@ -77,7 +77,7 @@ def find_lcm(num1, num2):
 def lcm_of_list(numbers):
 
     result = numbers[0]
-    
+
     for n in numbers[1:]:
         result = find_lcm(result, n)
     return result
@@ -96,7 +96,7 @@ def main():
             numbers = get_numbers()
             
             if all(n==0 for n in numbers):
-                print("GCD undefined for (0,0)")
+                print("GCD undefined for all numbers")
                 pause()
                 continue
 
