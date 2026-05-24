@@ -13,8 +13,25 @@ def get_positive_number():
         except ValueError:
             print("Invalid number!")
 
-def prime_factorization():
-    pass
+def prime_factorization(number):
+    
+    factors = []
+
+    divisor = 2
+
+    while divisor * divisor <= number:
+
+        while number % divisor == 0:
+            factors.append(divisor)
+            number //= divisor
+
+        divisor += 1
+
+    # If number is still greater than 1, then it itself is a prime factor
+    if number > 1:
+        factors.append(number)
+
+    return factors
 
 def main ():
 
@@ -23,3 +40,6 @@ def main ():
     factors = prime_factorization(num)
 
     print(f"\nPrime factors: {factors}")
+
+if __name__ == "__main__":
+    main()
