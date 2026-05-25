@@ -265,7 +265,7 @@ def check_winner(player_total, dealer_total):
 
 def show_result(result, blackjack = False):
 
-    print("===== Results =====")
+    print("========== Results ==========")
 
     if result == "player":
 
@@ -281,7 +281,7 @@ def show_result(result, blackjack = False):
     else:
         print("It's a draw. Bet returned.")
      
-    print("===================")
+    print("=============================")
 
 def play_again():
     
@@ -302,7 +302,51 @@ def play_again():
 # Main program
 
 def play_round(balance):
-    pass
+    # Run a single round and return the updated balance
+
+    bet = get_bet_amount(balance)
+
+    player_hand, dealer_hand = deal_initial_cards()
+
+    # Check player blackjack immediately
+    if is_blackjack(player_hand):
+
+        print("\nBlackjack!")
+        dealer_hand = dealer_turn(dealer_hand, player_hand)
+        dealer_total = calculate_total_hand(dealer_hand)
+
+        # Blackjack beats everything except dealer blackjack
+        if is_blackjack(dealer_hand):
+            result = "draw"
+
+        else:
+            result = "player"
+
+        blackjack = (result == "player")
+
+    else:
+        # Player's turn
+        player_hand = player_turn(player_hand)
+
+        if is_bust(player_hand):
+            result = "dealer"
+            blackjack = False
+
+        else:
+            # Dealer's turn
+            dealer_hand = dealer_turn(dealer_hand, player_hand)
+            player_total = calculate_total_hand(player_hand)
+            dealer_total = calculate_total_hand(dealer_hand)
+
+            print(f"\nFinal — You: {player_total}  |  Dealer: {dealer_total}")
+            result = check_winner(player_total, dealer_total)
+            blackjack = False
+
+    show_result(result, blackjack)
+    balance = update_balance(balance, result, bet, blackjack)
+
+    print(f"Your balance: ${balance}")
+    return balance
 
 def main():
     
@@ -321,11 +365,11 @@ def main():
             balance = play_round(balance)
 
             if balance <= 0:
-                print(f"\nYour broke ahh is out of money")
+                print("\nYour broke ahh is out of money")
                 break
 
             if not play_again():
-                print(f"\nThanks for playing, if you found any bugs then tell me")
+                print("🥀")
 
         elif choice == 2: 
             show_rules()
