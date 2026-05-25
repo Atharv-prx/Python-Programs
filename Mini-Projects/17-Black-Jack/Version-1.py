@@ -1,3 +1,5 @@
+import random 
+
 card={ "A♠": 11, "2♠": 2, "3♠": 3, "4♠": 4, "5♠": 5, "6♠": 6, "7♠": 7,
     "8♠": 8, "9♠": 9, "10♠": 10, "J♠": 10, "Q♠": 10, "K♠": 10,
 
@@ -10,6 +12,8 @@ card={ "A♠": 11, "2♠": 2, "3♠": 3, "4♠": 4, "5♠": 5, "6♠": 6, "7♠"
     "A♣": 11, "2♣": 2, "3♣": 3, "4♣": 4, "5♣": 5, "6♣": 6, "7♣": 7,
     "8♣": 8, "9♣": 9, "10♣": 10, "J♣": 10, "Q♣": 10, "K♣": 10
 }
+
+STARTING_BALANCE = 1000
 
 # ================
 # Helper functions
@@ -32,6 +36,11 @@ def get_choice(prompt, min_value, max_value):
 def pause():
     input("\nPress Enter to continue...")
 
+def display_hand():
+    pass
+
+def validate_bet():
+    pass
 # =============
 # Game Features
 
@@ -87,6 +96,19 @@ def get_bet_amount():
     pass
 
 def deal_initial_cards():
+
+    all_cards = list(card.keys())
+    dealt = random.sample(all_cards, 4)
+    player_hand = dealt[:2]
+    dealer_hand = dealt[2:]
+
+    print()
+    display_hand("Your cards ", player_hand)
+    display_hand("Dealer     ", dealer_hand, hide_second=True)
+
+    return player_hand, dealer_hand
+
+def get_player_action(player_hand):
     pass
 
 def player_turn(player_hand):
