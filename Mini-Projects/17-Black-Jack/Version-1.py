@@ -303,48 +303,46 @@ def play_again():
 
 def play_round(balance):
     # Run a single round and return the updated balance
-
     bet = get_bet_amount(balance)
-
+ 
     player_hand, dealer_hand = deal_initial_cards()
-
+ 
     # Check player blackjack immediately
     if is_blackjack(player_hand):
+        print("\nBlackjack")
 
-        print("\nBlackjack!")
-        dealer_hand = dealer_turn(dealer_hand, player_hand)
-        dealer_total = calculate_total_hand(dealer_hand)
+        # Dealer only peeks at their hole card — no drawing
+        print("\n--- Dealer reveals hole card ---")
+        display_hand("Dealer     ", dealer_hand)
 
-        # Blackjack beats everything except dealer blackjack
         if is_blackjack(dealer_hand):
+            print("Dealer also has Blackjack!")
             result = "draw"
 
         else:
             result = "player"
-
+            
         blackjack = (result == "player")
 
     else:
         # Player's turn
         player_hand = player_turn(player_hand)
-
+ 
         if is_bust(player_hand):
             result = "dealer"
             blackjack = False
-
         else:
             # Dealer's turn
             dealer_hand = dealer_turn(dealer_hand, player_hand)
             player_total = calculate_total_hand(player_hand)
             dealer_total = calculate_total_hand(dealer_hand)
-
+ 
             print(f"\nFinal — You: {player_total}  |  Dealer: {dealer_total}")
             result = check_winner(player_total, dealer_total)
             blackjack = False
-
+ 
     show_result(result, blackjack)
     balance = update_balance(balance, result, bet, blackjack)
-
     print(f"Your balance: ${balance}")
     return balance
 
