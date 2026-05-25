@@ -141,8 +141,21 @@ def show_rules():
      
     pause()
 
-def get_bet_amount():
-    pass
+def get_bet_amount(balance):
+    # Prompt till a valid bet in entered
+
+    while True:
+        try:
+            bet = int(input(f"\nYour balance: ${balance} | Enter bet: $"))
+            error = validate_bet(bet, balance)
+
+            if error:
+                print(error)
+            else:
+                return bet
+            
+        except ValueError:
+            print("Please enter a whole number.")
 
 def deal_initial_cards():
 
@@ -158,22 +171,117 @@ def deal_initial_cards():
     return player_hand, dealer_hand
 
 def get_player_action(player_hand):
-    pass
+    # Prompt the player for hit or stand; return 'h' or 's'
+
+    while True:
+
+        action = input("\nHit (h) or Stand (s)? ").strip().lower()
+
+        if action in ("h", "s"):
+            return action
+        
+        print("Please enter 'h' to hit or 's' to stand.")
 
 def player_turn(player_hand):
-    pass
+    # Let the player hit until they stand or bust, Returns the final hand.
 
-def dealer_turn():
-    pass
+    while True:
+        total = calculate_total_hand(player_hand)
 
-def update_balance(balance, result, bet_amount):
-    pass
+        if total == 21:
+            print("\nYou hit 21!")
+            break
+
+        if is_bust(player_hand):
+            print(f"\nBust! Your total is {total}.")
+            break
+
+        action = get_player_action(player_hand)
+
+        if action == "h":
+            new_card = draw_card(player_hand)
+            player_hand.append(new_card)
+            print(f"\nYou drew: {new_card}")
+            display_hand("Your cards ", player_hand)
+        else:
+            print(f"\nYou stand with {total}.")
+            break
+
+    return player_hand
+
+def dealer_turn(dealer_hand, player_hand):
+    # Reveal dealer's hidden card, then draw until total ≥ 17, Returns the final dealer hand
+
+    print("\n=== Dealer's turn ===")
+    display_hand("Dealer     ", dealer_hand)
+
+    while calculate_total_hand(dealer_hand) < 17:
+
+        new_card = draw_card(player_hand + dealer_hand)
+        dealer_hand.append(new_card)
+
+        print(f"Dealer drew: {new_card}")
+        display_hand("Dealer     ", dealer_hand)
+
+    total = calculate_total_hand(dealer_hand)
+
+    if is_bust(dealer_hand):
+        print(f"Dealer busts with {total}!")
+
+    else:
+        print(f"Dealer stands with {total}.")
+
+    return dealer_hand
+
+def update_balance(balance, result, bet_amount, blackjack = False):
+    # Adjust balance; blackjack pays 1.5×
+
+    if result == "player":
+        winnings = int(bet_amount * 1.5) if blackjack else bet_amount
+        balance += winnings
+
+    elif result == "dealer":
+        balance -= bet_amount
+
+    # draw → no change
+    return balance
 
 def check_winner(player_total, dealer_total):
-    pass
 
-def show_result():
-    pass
+    if player_total > 21:
+        return "dealer"
+    
+    elif dealer_total > 21:
+        return "player"
+    
+    elif player_total > dealer_total:
+        return "player"
+    
+    elif dealer_total > player_total:
+        return "dealer"
+    
+    else:
+        return "draw"
+
+def show_result(result, blackjack = False):
+
+    print("===== Results =====")
+
+    if result == "player":
+
+        if blackjack:
+            print("BLACKJACK! You win 1.5× your bet")
+
+        else:
+            print("You win!")
+
+    elif result == "dealer":
+        print("Dealer wins, Imagine losing 🥀.")
+
+    else:
+        print("It's a draw. Bet returned.")
+     
+    print("===================")
 
 def play_again():
     
