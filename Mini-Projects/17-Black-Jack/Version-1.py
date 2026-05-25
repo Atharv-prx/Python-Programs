@@ -36,14 +36,59 @@ def get_choice(prompt, min_value, max_value):
 def pause():
     input("\nPress Enter to continue...")
 
-def claculate_total_hand():
-    pass
+def calculate_total_hand(hand):
+    # Sum hand value, adjusting Aces from 11 → 1 to avoid busting
 
-def display_hand():
-    pass
+    total = sum(card[c] for c in hand)
 
-def validate_bet():
-    pass
+    aces = sum(1 for c in hand if c.startswith("A"))
+
+    while total > 21 and aces:
+
+        total -= 10
+        aces -= 1
+    
+    return total
+
+def is_blackjack(hand):
+    # True if hand is a natural blackjack (exactly 2 cards totalling 21)
+
+    return len(hand) == 2 and calculate_total_hand(hand) == 21
+
+def is_bust(hand):
+    return calculate_total_hand(hand) > 21
+
+def draw_card(existing_hand):
+    # Draw one card that isn't already in the provided hand
+
+    available = [c for c in card if c not in existing_hand]
+
+    if not available:
+        raise RuntimeError("No cards left in deck")
+    
+    return random.choice(available)
+
+def display_hand(label, hand, hide_second=False):
+    # Print a labelled hand; optionally conceal the second card  
+      
+    if hide_second:
+        print(f"{label}: {hand[0]}  ?    (showing {card[hand[0]]})")
+
+    else:
+        total = calculate_total_hand(hand)
+        print(f"{label}: {' '.join(hand)}    (total: {total})")
+
+def validate_bet(bet, balance):
+
+    # Return an error message string, or None if the bet is valid
+
+    if bet <= 0:
+        return "Bet must be greater than $0."
+    
+    if bet > balance:
+        return f"You only have ${balance}. Can't bet ${bet}."
+    
+    return None
 
 # =============
 # Game Features
