@@ -36,11 +36,15 @@ def get_choice(prompt, min_value, max_value):
 def pause():
     input("\nPress Enter to continue...")
 
+def claculate_total_hand():
+    pass
+
 def display_hand():
     pass
 
 def validate_bet():
     pass
+
 # =============
 # Game Features
 
@@ -117,34 +121,64 @@ def player_turn(player_hand):
 def dealer_turn():
     pass
 
-def claculate_total_hand():
-    pass
-
 def update_balance(balance, result, bet_amount):
     pass
 
 def check_winner(player_total, dealer_total):
     pass
 
-def play_again():
+def show_result():
     pass
+
+def play_again():
+    
+    while True:
+
+        choice = input("\nWanna play again? (y/n): ").strip().lower()
+
+        if choice == "y":
+            return True
+        
+        elif choice == "n":
+            return False
+        
+        else:
+            print("Please enter 'y' or 'n'")
 
 # ============
 # Main program
 
+def play_round(balance):
+    pass
+
 def main():
+    
+    balance = STARTING_BALANCE
 
     while True:
         choice = menu()
 
         if choice == 1:
-            pass #Future game logic
+
+            if balance <= 0:
+
+                print("\nYour broke ahh is out of money")
+                break
+            
+            balance = play_round(balance)
+
+            if balance <= 0:
+                print(f"\nYour broke ahh is out of money")
+                break
+
+            if not play_again():
+                print(f"\nThanks for playing, if you found any bugs then tell me")
 
         elif choice == 2: 
             show_rules()
         
         elif choice == 3:
-            print("Thanks for playing!")
+            print("Thanks for playing, if you found any bugs then tell me")
             break
 
 if __name__ == "__main__":
