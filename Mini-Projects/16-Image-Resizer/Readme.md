@@ -14,6 +14,7 @@ A multithreaded image processing tool that resizes and converts images in bulk u
 
 ## Step 1
 
+Make 2 folders named input and output, use version-4-main.py for best results.
 Place images inside:
 
 ```text
