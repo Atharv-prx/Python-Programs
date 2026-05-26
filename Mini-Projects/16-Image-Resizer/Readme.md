@@ -1,39 +1,16 @@
 # Multithreaded Image Resizer & Converter
 
 Built as a part of my learning journey
-A Python project that resizes and converts multiple images simultaneously using multithreading and worker queues.
+A multithreaded image processing tool that resizes and converts images in bulk using worker threads and queue-based task management
 
-# Features Implemented
+# Supported Formats
 
-## Current Features
-
-- Batch image processing
-- Multithreaded resizing
-- Queue-based worker system
-- Thread-safe printing using locks
-- Automatic processing of all images inside input folder
-- Output images saved into output folder
-- Image resizing using Pillow
-- Worker pool architecture
-
-# Project Structure
-
-```text
-16-Image-Resizer/
-│
-├── input/
-├── output/
-├── main.py (Try latest version for best results)
-└── README.md
-```
+- PNG
+- JPG
+- JPEG
+- WEBP
 
 # How To Run
-
-## Prerequisite - Install Pillow
-
-```bash
-pip install pillow
-```
 
 ## Step 1
 
@@ -43,45 +20,41 @@ Place images inside:
 input/
 ```
 
----
-
 ## Step 2
 
-Run program:
+Run the program:
 
 ```bash
 python main.py
 ```
 
----
-
 ## Step 3
 
-Processed images will appear inside:
+Choose:
+- output format
+- width
+- height
+
+## Step 4
+
+Processed images appear inside:
 
 ```text
 output/
 ```
 
+# Future Improvements
 
-# Planned Improvements
-
-- Better exception handling
-- Progress tracking
-- Execution timer
+## Performance & Threading
 - Dynamic worker count
-- Format conversion support
-- Image compression options
-- Preserve metadata
-- GUI version using Tkinter
-- Drag & drop support
-- Recursive directory processing
+- Better queue shutdown system
+- Compression quality settings
+- Custom aspect ratio modes
+- Crop mode
 
-# Example Output
-
-```text
-cat.png resized successfully.
-dog.jpg resized successfully.
-car.webp resized successfully.
-
-All images processed.
+Possible GUI features:
+- file explorer
+- live preview
+- progress tracking
+- drag & drop
+- image comparison
