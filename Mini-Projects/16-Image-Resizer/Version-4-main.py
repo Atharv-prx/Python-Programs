@@ -3,92 +3,130 @@ import os
 import threading
 import queue
 
-def get_int(prompt):
-    while True:
-        try:
-            value = int(input(prompt))
-            if value > 0:
-                return value
-            print("Enter a positive number.")
-        except ValueError:
-            print("Invalid number.")
+# ==============
+# Global Objects
 
 q = queue.Queue()
 print_lock = threading.Lock()
 
-# Ask user for target format
-target_format = input("Enter output format (png/jpg/jpeg/webp): ").lower()
+# ================
+# Helper Functions
 
-# Allowed formats
-allowed_formats = ["png", "jpg", "jpeg", "webp"]
+def get_int(prompt):
 
-if target_format not in allowed_formats:
-    print("Unsupported format.")
-    exit()
+    while True:
 
-width = get_int(input("Enter width: "))
-height = get_int(input("Enter height: "))
+        try:
+            value = int(input(prompt))
 
-# Process one image
-def resize_image(file):
+            if value > 0:
+                return value
+
+            print("Enter a positive number.")
+
+        except ValueError:
+            print("Invalid number.")
+
+def get_target_format():
+
+    allowed_formats = ["png", "jpg", "jpeg", "webp"]
+
+    while True:
+
+        target_format = input("Enter output format--> (png/jpg/jpeg/webp): ").strip().lower()
+
+        if target_format in allowed_formats:
+            return target_format
+
+        print("Unsupported format.")
+
+# ================
+# Image Processing
+
+def resize_image(file, width, height, target_format):
 
     path = f"input/{file}"
 
     img = Image.open(path)
 
-    # Resize image
+    # Thumbnail resizes while maintaining aspect ratio
     img.thumbnail((width, height))
 
     # Split filename and extension
     filename, old_extension = os.path.splitext(file)
 
-    # JPG/JPEG doesn't support transparency
-    if target_format in ["jpg", "jpeg"]:
+    # JPG doesn't support transparency
+    if target_format == "jpg":
         img = img.convert("RGB")
 
-    # Create new output path
-    output_path = f"output/{filename}.{target_format}"
+    # Create output path
+    output_path = (f"output/{filename}.{target_format}")
 
-    # Save converted image
+    # Save image
     img.save(output_path)
 
     with print_lock:
-        print(
-            f"{file} converted to "
-            f"{target_format} successfully."
-        )
 
-# Worker thread
-def worker():
+        print(f"{file} converted to {target_format} successfully.")
+
+# =============
+# Worker Thread
+
+def worker(width, height, target_format):
 
     while not q.empty():
 
         file = q.get()
 
-        resize_image(file)
+        resize_image(
+            file,
+            width,
+            height,
+            target_format
+            )
 
         q.task_done()
 
-# Add jobs to queue
-for file in os.listdir("input"):
-    q.put(file)
+# =============
+# Main Function
 
-# Create worker threads
-threads = []
+def main():
 
-for i in range(4):
+    target_format = get_target_format()
 
-    t = threading.Thread(target=worker)
+    width = get_int("Enter width: ")
+    height = get_int("Enter height: ")
 
-    threads.append(t)
+    # Add files to queue
+    for file in os.listdir("input"):
+        q.put(file)
 
-    t.start()
+    # Create worker threads
+    threads = []
 
-# Wait for all queue tasks
-q.join()
+    for i in range(4):
 
-# Wait for all threads
-for t in threads:
-    t.join()
+        t = threading.Thread(
+            target=worker,
+            args=(
+                width,
+                height,
+                target_format
+            )
+        )
 
-print("\nAll images processed.")
+        threads.append(t)
+
+        t.start()
+
+    # Wait for queue completion
+    q.join()
+
+    # Wait for all threads
+    for t in threads:
+        t.join()
+
+    print("\nAll images processed.")
+
+if __name__ == "__main__":
+    main()
