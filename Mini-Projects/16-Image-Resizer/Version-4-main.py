@@ -3,6 +3,16 @@ import os
 import threading
 import queue
 
+def get_int(prompt):
+    while True:
+        try:
+            value = int(input(prompt))
+            if value > 0:
+                return value
+            print("Enter a positive number.")
+        except ValueError:
+            print("Invalid number.")
+
 q = queue.Queue()
 print_lock = threading.Lock()
 
@@ -16,6 +26,9 @@ if target_format not in allowed_formats:
     print("Unsupported format.")
     exit()
 
+width = get_int(input("Enter width: "))
+height = get_int(input("Enter height: "))
+
 # Process one image
 def resize_image(file):
 
@@ -24,7 +37,7 @@ def resize_image(file):
     img = Image.open(path)
 
     # Resize image
-    img.thumbnail((800, 600))
+    img.thumbnail((width, height))
 
     # Split filename and extension
     filename, old_extension = os.path.splitext(file)
