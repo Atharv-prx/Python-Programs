@@ -3,25 +3,6 @@
 Built as part of my Python learning journey.
 A console-based Vehicle Management System.
 
-# Features
-
-- Add Vehicles, Show Vehicles, Remove Vehicles
-- Search Vehicles using Vehicle ID
-- Validation System for User Input
-- Multiple Vehicle Types with shared Vehicle Management Functions
-- Nested Menu System
-- Duplicate Vehicle ID Prevention
-
-# Concepts Used
-
-This project helped practice and improve understanding of:
-
-- Classes & Objects
-- Inheritance
-- Polymorphism
-- Method Overriding
-- Searching & Removing Objects
-
 # Version History
 
 ## Version 1
@@ -79,5 +60,5 @@ Planned future upgrades for this project:
 - Better Project File Structure
 - GUI Version using Tkinter or PyQt
 - Database Integration using SQLite
-- Advanced OOP Refactoring
+- Advanced OOP Refactorings
 - Improved Exception Handling

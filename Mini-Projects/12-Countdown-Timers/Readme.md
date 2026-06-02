@@ -3,29 +3,6 @@
 Built as part of my Python multithreading learningjourney.
 A console-based multithreaded timer application.
 
-# Features
-- Run Multiple Timers Concurrently
-- Dynamic Timer Creation using User Input
-- Real-Time Countdown Display Graceful Stop System 
-- Concurrent Timer Management using Lists 
-
-# Concepts Used
-
-This project helped practice and improve understanding of:
-
-- Multithreading
-- start(), join()
-- Daemon Threads
-- threading.Event
-- .set(), .is_set()
-- Thread Communication
-- Graceful Thread Shutdown
-- threading.Lock
-- Synchronized Printing
-- Dynamic Thread Creation
-- Thread Management using Lists
-- Concurrent Program Design
-
 # Version History
 
 ## Version 1
