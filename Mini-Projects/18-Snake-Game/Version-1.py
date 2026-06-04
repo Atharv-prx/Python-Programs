@@ -10,11 +10,18 @@ SNAKE_COLOR = "#00FF00"
 FOOD_COLOR = "#FF0000"
 BACKGROUND_COLOR = "#000000"
 
-class snake:
+class Snake:
     pass
 
-class food:
-    pass
+class Food:
+    def __init__(self):
+
+        x = random.randint(0, GAME_WIDTH // SPACE_SIZE - 1) * SPACE_SIZE
+        y = random.randint(0, GAME_HEIGHT // SPACE_SIZE - 1) * SPACE_SIZE
+
+        self.coordinates = [x, y]
+
+        canvas.create_oval(x, y, x + SPACE_SIZE, y + SPACE_SIZE, fill=FOOD_COLOR, tag="food")
 
 def next_turn(snake, food):
     pass
@@ -28,37 +35,33 @@ def check_collisions():
 def game_over():
     pass
 
-def main():
-    window = Tk()
+window = Tk()
 
-    window.title("Snake Game")
-    window.resizable(False, False) # Prevents the window from being resized
-    
-    score = 0
-    direction = 'down'
+window.title("Snake Game")
+window.resizable(False, False) # Prevents the window from being resized
 
-    score_label = Label(window, text="Score: {}".format(score), font=('consolas', 20)) # .format(score) is used to insert the value of score into the string
-    score_label.pack()
-    
-    canvas = Canvas(window, bg=BACKGROUND_COLOR, height=GAME_HEIGHT, width=GAME_WIDTH)
-    canvas.pack()
+score = 0
+direction = 'down'
 
-    window.update() # Updates the window to show the canvas
+score_label = Label(window, text="Score: {}".format(score), font=('consolas', 20)) # .format(score) is used to insert the value of score into the string
+score_label.pack()
 
-    window_width = window.winfo_width() # Gets the width of the window
-    window_height = window.winfo_height() # Gets the height of the window
-    screen_width = window.winfo_screenwidth() # Gets the width of the screen
-    screen_height = window.winfo_screenheight() # Gets the height of the screen
+canvas = Canvas(window, bg=BACKGROUND_COLOR, height=GAME_HEIGHT, width=GAME_WIDTH)
+canvas.pack()
 
-    x = int((screen_width / 2) - (window_width / 2)) # Calculates the x coordinate to center the window
-    y = int((screen_height / 2) - (window_height / 2)) # Calculates the y coordinate to center the window
+window.update() # Updates the window to show the canvas
 
-    window.geometry(f"{window_width}x{window_height}+{x}+{y}") # Sets the geometry of the window to the calculated values
+window_width = window.winfo_width() # Gets the width of the window
+window_height = window.winfo_height() # Gets the height of the window
+screen_width = window.winfo_screenwidth() # Gets the width of the screen
+screen_height = window.winfo_screenheight() # Gets the height of the screen
 
-    snake = Snake()
-    food = Food()
+x = int((screen_width / 2) - (window_width / 2)) # Calculates the x coordinate to center the window
+y = int((screen_height / 2) - (window_height / 2)) # Calculates the y coordinate to center the window
 
-    window.mainloop()
+window.geometry(f"{window_width}x{window_height}+{x}+{y}") # Sets the geometry of the window to the calculated values
 
-if __name__ == "__main__":
-    main()
+snake = Snake()
+food = Food()
+
+window.mainloop()
