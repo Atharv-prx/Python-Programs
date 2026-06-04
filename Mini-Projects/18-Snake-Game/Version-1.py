@@ -3,7 +3,7 @@ import random
 
 GAME_WIDTH = 700
 GAME_HEIGHT = 700
-SPEED = 50
+SPEED = 100
 SPACE_SIZE = 50
 BODY_PARTS = 3
 SNAKE_COLOR = "#00FF00"
@@ -36,32 +36,48 @@ class Food:
 def next_turn(snake, food):
     x, y = snake.coordinates[0]
 
-    if direction == 'up':
+    if direction == "up":
         y -= SPACE_SIZE
-
-    elif direction == 'down':
+    elif direction == "down":
         y += SPACE_SIZE
-
-    elif direction == 'left':
+    elif direction == "left":
         x -= SPACE_SIZE
-
-    elif direction == 'right':
+    elif direction == "right":
         x += SPACE_SIZE
-    
-    snake.coordinates.insert(0,(x, y))
 
-    # we gonna create nnew graphic for head of the snake 
+    snake.coordinates.insert(0, (x, y))
+
     square = canvas.create_rectangle(x, y, x + SPACE_SIZE, y + SPACE_SIZE, fill=SNAKE_COLOR)
+
     snake.squares.insert(0, square)
     
-    # we gonna delete last body part of snake after it moves
-    del snake.coordinates[-1]
-    canvas.delete(snake.squares[-1])
+    # Check if the snake has eaten the food
+    if x == food.coordinates[0] and y == food.coordinates[1]:
 
-    del snake.squares[-1]
+        global score
 
-    # We need to call the next turn function again for the next turn ofc
-    window.after(SPEED, next_turn,snake, food)
+        score += 1
+
+        score_label.config(text="Score:{}".format(score))
+
+        canvas.delete("food")
+
+        food = Food()
+
+    else:
+        # Remove the last square from the snake
+        del snake.coordinates[-1]
+
+        canvas.delete(snake.squares[-1])
+
+        del snake.squares[-1]
+
+    # Check if the snake has collided with the walls or itself
+    if check_collisions(snake):
+        game_over()
+
+    else:
+        window.after(SPEED, next_turn, snake, food)
 
 def change_direction(new_direction):
     global direction
@@ -82,8 +98,20 @@ def change_direction(new_direction):
         if direction != 'up':
             direction = new_direction
 
-def check_collisions():
-    pass   
+def check_collisions(snake):
+    # Check if the snake has collided with the walls
+    x, y = snake.coordinates[0]
+
+    if x < 0 or x >= GAME_WIDTH:
+        return True
+    elif y < 0 or y >= GAME_HEIGHT:
+        return True
+
+    for body_part in snake.coordinates[1:]:
+        if x == body_part[0] and y == body_part[1]:
+            return True
+
+    return False
 
 def game_over():
     pass
