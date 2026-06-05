@@ -345,6 +345,8 @@ def build_menu_frame(parent):
         bg="#0a0a0a"
     ).pack(side=BOTTOM, pady=14)
 
+    return frame
+
 def build_game_frame(parent):
     # score label + canvas + hidden restart button + menu button
     global canvas, score_label, restart_button
