@@ -4,8 +4,6 @@
 # 3 --Multiple Food spawns
 # 4 --Difficulty System
 # 5 --Speed increases with score
-# 6 --Pause and Resume functionality
-# 7 --High Score Tracking
 
 from tkinter import *
 import random
