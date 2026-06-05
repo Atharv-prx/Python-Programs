@@ -320,6 +320,35 @@ def build_menu_frame(parent):
         ).pack(side=LEFT, 
                padx=8)
 
+    # FOOD COUNT
+    Label(
+        frame, text="FOOD ON SCREEN",
+        font=("Consolas", 13, "bold"),
+        fg="#888888", 
+        bg="#0a0a0a"
+    ).pack()
+
+    food_frame = Frame(frame, 
+                       bg="#0a0a0a")
+    food_frame.pack(pady=(6, 40))
+
+    for n in [1, 2, 3]:
+        Radiobutton(
+            food_frame,
+            text=str(n),
+            variable=food_count_var,
+            value=n,
+            font=("Consolas", 16, "bold"),
+            fg="#00FF00", 
+            bg="#0a0a0a",
+            activebackground="#0a0a0a",
+            activeforeground="#00FF00",
+            selectcolor="#1a1a1a",
+            indicatoron=True,
+            padx=12
+        ).pack(side=LEFT, 
+               padx=14)
+
     # START BUTTON
     start_btn = Button(
         frame,
