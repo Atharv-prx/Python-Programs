@@ -12,6 +12,15 @@ GAME_HEIGHT = 700
 window = None
 mode_var = None
 
+# ---------------------------------------------------
+# START/RESTART GAME
+# ---------------------------------------------------
+def start_game():
+    print("Testing")
+
+# ---------------------------------------------------
+# UI BUILDING
+# ---------------------------------------------------
 def build_menu_frame(parent):
 
     global mode_var
@@ -34,7 +43,8 @@ def build_menu_frame(parent):
         fg= "#3a7a3a",
         bg= "#0a0a0a"
     ).pack(pady=(0,30))
-
+    
+    # Mode selection
     Label(
         frame,
         text= "Choose mode",
@@ -45,7 +55,7 @@ def build_menu_frame(parent):
 
     mode_frame = Frame(frame,
                        bg="#0a0a0a")
-    mode_frame.pack()
+    mode_frame.pack(pady=(0,30))
     
     for n in ["Single-Player","Multi-Player"]:
         Radiobutton(
@@ -62,6 +72,32 @@ def build_menu_frame(parent):
             indicatoron=True,
         ).pack(anchor="w",
                pady=3)
+    
+    # Start Button 
+    start_button = Button(
+        frame,
+        text="▶  START GAME",
+        font=("Consolas", 18, "bold"),
+        fg="#000000", 
+        bg="#00FF00",
+        activebackground="#00cc00",
+        activeforeground="#000000",
+        relief=FLAT,
+        padx=24, 
+        pady=10,
+        cursor="hand2",
+        command= start_game
+    )
+    start_button.pack()
+    
+    # Sublte Footer
+    Label(
+        frame, 
+        text="Free free to give me ideas about improving this program :)",
+        font=("Consolas", 10),
+        fg="#333333", 
+        bg="#0a0a0a",
+    ).pack(side=BOTTOM, pady=14)
 
     return frame
 
