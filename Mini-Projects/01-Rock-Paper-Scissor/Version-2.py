@@ -49,7 +49,59 @@ def get_mode():
 # Canvas Drawing
 # ---------------------------------------------------
 def draw_waiting():
-    pass
+    canvas.delete("all")
+    mode = get_mode()
+
+    # Dashed border
+    _draw_border()
+
+    canvas.create_text(
+        GAME_WIDTH // 2, 120,
+        text="ROCK  PAPER  SCISSORS",
+        font=("Consolas", 22, "bold"),
+        fill="#00FF00"
+    )
+
+    if mode == "Single-Player":
+        canvas.create_text(
+            GAME_WIDTH // 2, 240,
+            text="Waiting for choice...",
+            font=("Consolas", 16),
+            fill="#888888"
+        )
+        canvas.create_text(
+            GAME_WIDTH // 2, GAME_HEIGHT - 60,
+            text="A = Rock     S = Paper     D = Scissors",
+            font=("Consolas", 13),
+            fill="#3a7a3a"
+        )
+    else:
+        canvas.create_text(
+            GAME_WIDTH // 2, 200,
+            text="Player 1: waiting...",
+            font=("Consolas", 16),
+            fill="#888888",
+            tags="p1_status"
+        )
+        canvas.create_text(
+            GAME_WIDTH // 2, 260,
+            text="Player 2: waiting...",
+            font=("Consolas", 16),
+            fill="#888888",
+            tags="p2_status"
+        )
+        canvas.create_text(
+            GAME_WIDTH // 2, GAME_HEIGHT - 80,
+            text="Player 1:  A / S / D",
+            font=("Consolas", 13),
+            fill="#3a7a3a"
+        )
+        canvas.create_text(
+            GAME_WIDTH // 2, GAME_HEIGHT - 50,
+            text="Player 2:  J / K / L",
+            font=("Consolas", 13),
+            fill="#3a7a3a"
+        )
 
 def draw_result_single(player_choice, computer_choice, outcome):
     pass
@@ -95,6 +147,7 @@ def handle_key(event):
 
         if game_state == "waiting":
             resolve_single(choice)
+
         elif game_state == "result":
             # Choice key from result: go straight into next round
             game_state = "waiting"
@@ -107,6 +160,7 @@ def handle_key(event):
         key = event.keysym
 
         if key == "Return":
+
             if game_state == "result":
                 game_state = "waiting"
                 p1_choice_pending = None
@@ -120,6 +174,7 @@ def handle_key(event):
             draw_waiting()
 
         if game_state == "waiting":
+
             if key in p1_keys:
                 p1_choice_pending = KEY_MAP[key]
                 # Update canvas to show P1 has locked in
@@ -131,14 +186,17 @@ def handle_key(event):
                     fill="#00ccff",
                     tags="p1_status"
                 )
+
                 if p1_choice_pending and _p2_locked:
                     pass   # handled below
 
             elif key in p2_keys:
                 p2_choice = KEY_MAP[key]
+
                 if p1_choice_pending is not None:
                     resolve_multi(p1_choice_pending, p2_choice)
                     p1_choice_pending = None
+
                 else:
                     # P2 pressed before P1 — store temporarily via tag
                     canvas.delete("p2_status")
