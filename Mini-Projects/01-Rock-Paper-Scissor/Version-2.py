@@ -1,9 +1,8 @@
 from tkinter import *
 import random
 
-# ---------------------------------------------------
+# ---------
 # CONSTANTS
-# ---------------------------------------------------
 GAME_WIDTH = 700
 GAME_HEIGHT = 700
 BACKGROUND_COLOR = "#000000"
@@ -19,9 +18,8 @@ WINS_AGAINST = {
     "Scissors": "Paper",
 }
 
-# ---------------------------------------------------
+# -------
 # GLOBALS
-# ---------------------------------------------------
 window              = None
 canvas              = None
 mode_var            = None
@@ -37,18 +35,100 @@ p1_choice_pending    = None # will hold p1 choice until p2 also presses
 
 game_state = "waiting"
 
-# ---------------------------------------------------
+# for easter egg 🙂
+idle_after_id = None
+idle_timers = []
+
+def idle_message_1():
+    canvas.delete("idle")
+
+    canvas.create_text(
+        GAME_WIDTH // 2,
+        GAME_HEIGHT // 2 + 100,
+        text="You there? (ಠ_ಠ)",
+        font=("Consolas", 16, "bold"),
+        fill="#ff9900",
+        tags="idle"
+    )
+
+def idle_message_2():
+    canvas.delete("idle")
+
+    canvas.create_text(
+        GAME_WIDTH // 2,
+        GAME_HEIGHT // 2 + 100,
+        text="Still waiting... (¬_¬)",
+        font=("Consolas", 16, "bold"),
+        fill="#ff9900",
+        tags="idle"
+    )
+
+def idle_message_3():
+    canvas.delete("idle")
+
+    canvas.create_text(
+        GAME_WIDTH // 2,
+        GAME_HEIGHT // 2 + 100,
+        text="Wake up! (>_<)",
+        font=("Consolas", 16, "bold"),
+        fill="#ff9900",
+        tags="idle"
+    )
+
+def idle_message_4():
+    canvas.delete("idle")
+
+    canvas.create_text(
+        GAME_WIDTH // 2,
+        GAME_HEIGHT // 2 + 100,
+        text="Achievement unlocked: Professional Procrastinator :)",
+        font=("Consolas", 16, "bold"),
+        fill="#ff9900",
+        tags="idle"
+    )
+
+def idle_message_5():
+    canvas.delete("idle")
+
+    canvas.create_text(
+    GAME_WIDTH // 2,
+    GAME_HEIGHT // 2 + 100,
+    text="Fine, i'll wait ( >_< )",
+    font=("Consolas", 16, "bold"),
+    fill="#ff9900",
+    tags="idle"
+    )
+
+def reset_idle_timer():
+    global idle_timers
+
+    # Cancelling old timers
+    for timer_id in idle_timers:
+        window.after_cancel(timer_id)
+
+    idle_timers.clear()
+
+    # Remove old idle text
+    canvas.delete("idle")
+    canvas.delete("idle_warning")
+
+    # Schedule new timers
+    idle_timers.append(window.after(10000, idle_message_1))
+    idle_timers.append(window.after(20000, idle_message_2))
+    idle_timers.append(window.after(30000, idle_message_3))
+    idle_timers.append(window.after(45000, idle_message_4))
+    idle_timers.append(window.after(60000, idle_message_5))
+
+# -------
 # Helpers 
-# ---------------------------------------------------
 def show_frame(frame):
     frame.tkraise()
 
 def get_mode():
     return mode_var.get()
 
-# ---------------------------------------------------
+# --------------
 # Canvas Drawing
-# ---------------------------------------------------
 def draw_waiting():
     canvas.delete("all")
     mode = get_mode()
@@ -66,7 +146,7 @@ def draw_waiting():
     if mode == "Single-Player":
         canvas.create_text(
             GAME_WIDTH // 2, 240,
-            text="Waiting for choice...",
+            text="Waiting for choice (^w^)",
             font=("Consolas", 16),
             fill="#888888"
         )
@@ -79,14 +159,14 @@ def draw_waiting():
     else:
         canvas.create_text(
             GAME_WIDTH // 2, 200,
-            text="Player 1: waiting...",
+            text="Player 1: waiting (o_o)",
             font=("Consolas", 16),
             fill="#888888",
             tags="p1_status"
         )
         canvas.create_text(
             GAME_WIDTH // 2, 260,
-            text="Player 2: waiting...",
+            text="Player 2: waiting (^-^)",
             font=("Consolas", 16),
             fill="#888888",
             tags="p2_status"
@@ -205,15 +285,15 @@ def _draw_border():
 
 def _outcome_style(outcome):
     if outcome == "win":
-        return "#00FF00", "YOU WIN!"
+        return "#00FF00", "YOU WIN :D"
     elif outcome == "lose":
-        return "#FF4444", "YOU LOSE!"
+        return "#FF4444", "YOU LOSE :("
     else:
-        return "#ffff00", "DRAW!"
+        return "#ffff00", "DRAW (•_•)"
 
-# ---------------------------------------------------
+# ----------
 # Game Logic
-# ---------------------------------------------------
+
 def resolve_single(player_choice):
     global player_1_score, computer_score, game_state
 
@@ -250,11 +330,10 @@ def resolve_multi(p1, p2):
     game_state = "result"
     draw_result_multi(p1, p2, outcome)
 
-# ---------------------------------------------------
+# ------------
 # Key Handling 
-# ---------------------------------------------------
 def handle_key(event):
-
+    reset_idle_timer()
     global game_state, p1_choice_pending
 
     # Only handle keys when on game frame
@@ -345,9 +424,9 @@ def handle_key(event):
 # Sentinel used above (cleaner than another global)
 _p2_locked = False
 
-# ---------------------------------------------------
+# ------------------
 # START/RESTART GAME
-# ---------------------------------------------------
+
 def start_game():
     show_frame(game_frame)
     _launch_game()
@@ -371,13 +450,15 @@ def _launch_game():
 
     restart_button.place_forget()
     draw_waiting()
+    
+    reset_idle_timer()
 
 def go_to_menu():
     show_frame(menu_frame)
 
-# ---------------------------------------------------
+# -----------
 # UI BUILDING
-# ---------------------------------------------------
+
 def build_menu_frame(parent):
 
     global mode_var
@@ -397,7 +478,7 @@ def build_menu_frame(parent):
     
     Label(
         frame,
-        text= "Be sure to read keybinds",
+        text= "Be sure to read keybinds below ( >_< )",
         font= ("Consolas", 14),
         fg= "#3a7a3a",
         bg= "#0a0a0a"
@@ -468,7 +549,7 @@ def build_menu_frame(parent):
     # Sublte Footer
     Label(
         frame, 
-        text="Free free to give me ideas about improving this program :)",
+        text="Feel free to give me ideas about improving this program :)",
         font=("Consolas", 10),
         fg="#333333", 
         bg="#0a0a0a",
@@ -549,9 +630,8 @@ def build_game_frame(parent):
 
     return frame
 
-# ---------------------------------------------------
+# ----
 # MAIN
-# ---------------------------------------------------
 def main():
     
     global window, menu_frame, game_frame, mode_var
