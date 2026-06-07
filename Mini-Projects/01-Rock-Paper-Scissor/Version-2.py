@@ -103,11 +103,97 @@ def draw_waiting():
             fill="#3a7a3a"
         )
 
-def draw_result_single(player_choice, computer_choice, outcome):
-    pass
+def draw_result_single(player_choice, comp_choice, outcome):
+    canvas.delete("all")
+    _draw_border()
+
+    # Title
+    canvas.create_text(
+        GAME_WIDTH // 2, 100,
+        text="ROCK  PAPER  SCISSORS",
+        font=("Consolas", 22, "bold"),
+        fill="#00FF00"
+    )
+
+    # Choices
+    canvas.create_text(
+        GAME_WIDTH // 2, 230,
+        text=f"You chose:   {player_choice.upper()}",
+        font=("Consolas", 18),
+        fill="#ffffff"
+    )
+    canvas.create_text(
+        GAME_WIDTH // 2, 290,
+        text=f"Computer:    {comp_choice.upper()}",
+        font=("Consolas", 18),
+        fill="#aaaaaa"
+    )
+
+    # Outcome
+    color, label = _outcome_style(outcome)
+    canvas.create_text(
+        GAME_WIDTH // 2, 400,
+        text=label,
+        font=("Consolas", 32, "bold"),
+        fill=color
+    )
+
+    # Next round hint
+    canvas.create_text(
+        GAME_WIDTH // 2, GAME_HEIGHT - 60,
+        text="Press Enter for next round  (or A/S/D to pick immediately)",
+        font=("Consolas", 13),
+        fill="#3a7a3a"
+    )
 
 def draw_result_multi(p1_choice, p2_choice, outcome):
-    pass
+
+    canvas.delete("all")
+    _draw_border()
+
+    canvas.create_text(
+        GAME_WIDTH // 2, 100,
+        text="ROCK  PAPER  SCISSORS",
+        font=("Consolas", 22, "bold"),
+        fill="#00FF00"
+    )
+
+    canvas.create_text(
+        GAME_WIDTH // 2, 230,
+        text=f"Player 1:   {p1_choice.upper()}",
+        font=("Consolas", 18),
+        fill="#00ccff"
+    )
+    canvas.create_text(
+        GAME_WIDTH // 2, 290,
+        text=f"Player 2:   {p2_choice.upper()}",
+        font=("Consolas", 18),
+        fill="#ff9900"
+    )
+
+    if outcome == "p1":
+        label = "PLAYER 1 WINS!"
+        color = "#00ccff"
+    elif outcome == "p2":
+        label = "PLAYER 2 WINS!"
+        color = "#ff9900"
+    else:
+        label = "DRAW!"
+        color = "#ffff00"
+
+    canvas.create_text(
+        GAME_WIDTH // 2, 400,
+        text=label,
+        font=("Consolas", 32, "bold"),
+        fill=color
+    )
+
+    canvas.create_text(
+        GAME_WIDTH // 2, GAME_HEIGHT - 60,
+        text="Press Enter for next round  (or any key to pick immediately)",
+        font=("Consolas", 13),
+        fill="#3a7a3a"
+    )
 
 def _draw_border():
     pass
