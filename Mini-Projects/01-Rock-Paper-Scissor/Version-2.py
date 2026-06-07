@@ -5,6 +5,7 @@ from tkinter import *
 # ---------------------------------------------------
 GAME_WIDTH = 700
 GAME_HEIGHT = 700
+BACKGROUND_COLOR = "#000000"
 
 # ---------------------------------------------------
 # GLOBALS
@@ -16,7 +17,13 @@ mode_var = None
 # START/RESTART GAME
 # ---------------------------------------------------
 def start_game():
-    print("Testing")
+    print("Placeholder")
+
+def restart_game():
+    print("Placeholder")
+
+def go_to_menu():
+    print("Placeholder")
 
 # ---------------------------------------------------
 # UI BUILDING
@@ -101,6 +108,79 @@ def build_menu_frame(parent):
 
     return frame
 
+def build_game_frame(parent):
+    
+    # Score label + canvas + hidden restart button + menu button 
+    global canvas, score_label, restart_button 
+
+    frame = Frame(parent,
+                  bg= "#000000")
+    
+    # This bar would contain menu button and score label
+    top_bar = Frame(frame, 
+                    bg="#111111")
+    top_bar.pack()
+    
+    # Menu button at top left
+    menu_button = Button(
+        top_bar,
+        text="MENU",
+        font=("Consolas", 12),
+        fg="#00FF00", 
+        bg="#111111",
+        activebackground="#222222",
+        activeforeground="#00FF00",
+        relief=FLAT, 
+        padx=10, 
+        pady=4,
+        cursor="hand2",
+        command=go_to_menu
+    )
+    menu_button.pack(side=LEFT,
+                     padx=6,
+                     pady=4)
+    
+    # Score label at top right
+    score_label = Label(
+        top_bar,
+        text="Score: 0",
+        font=("Consolas", 18, "bold"),
+        fg="#00FF00", 
+        bg="#111111"
+    )    
+    score_label.pack(side=RIGHT, 
+                     padx=16, 
+                     pady=4)
+    
+    # Canvas
+    canvas = Canvas(
+        frame,
+        bg=BACKGROUND_COLOR,
+        height=GAME_HEIGHT,
+        width=GAME_WIDTH,
+        highlightthickness=0
+    )
+    canvas.pack()
+
+    # Hidden restart button 
+    restart_button = Button(
+        canvas,
+        text="Restart",
+        font=("Consolas", 18, "bold"),
+        fg="#000000", 
+        bg="#00FF00",
+        activebackground="#00cc00",
+        relief=FLAT,
+        padx=20, pady=8,
+        cursor="hand2",
+        command=restart_game
+    )
+
+    return frame
+
+# ---------------------------------------------------
+# MAIN
+# ---------------------------------------------------
 def main():
     
     global window
