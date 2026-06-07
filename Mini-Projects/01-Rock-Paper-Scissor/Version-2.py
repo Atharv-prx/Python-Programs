@@ -7,6 +7,17 @@ GAME_WIDTH = 700
 GAME_HEIGHT = 700
 BACKGROUND_COLOR = "#000000"
 
+CHOICES = ["Rock", "Paper", "Scissors"]
+KEY_MAP = {
+    "a": "Rock", "s": "Paper", "d": "Scissors",   # P1
+    "j": "Rock", "k": "Paper", "l": "Scissors",   # P2
+}
+WINS_AGAINST = {
+    "Rock":     "Scissors",
+    "Paper":    "Rock",
+    "Scissors": "Paper",
+}
+
 # ---------------------------------------------------
 # GLOBALS
 # ---------------------------------------------------
@@ -15,12 +26,15 @@ canvas              = None
 mode_var            = None
 score_label         = None
 restart_button      = None
+
 player_1_score      = 0
 player_2_score      = 0
 computer_score      = 0
-player_1_choice     = None
-player_2_choice     = None
-computer_choice     = None
+
+# Waiting for both players' input in multiplayer
+p1_choice_pending    = None # will hold p1 choice until p2 also presses 
+
+game_state = "waiting"
 
 # ---------------------------------------------------
 # Helpers 
@@ -28,44 +42,41 @@ computer_choice     = None
 def show_frame(frame):
     frame.tkraise()
 
+def get_mode():
+    return mode_var.get()
+
+# ---------------------------------------------------
+# Canvas Drawing
+# ---------------------------------------------------
+def draw_waiting():
+    pass
+
+def draw_result_single(player_choice, computer_choice, outcome):
+    pass
+
+def draw_result_multi(p1_choice, p2_choice, outcome):
+    pass
+
+def _draw_border():
+    pass
+
+def _outcome_style(outcome):
+    pass
+
+# ---------------------------------------------------
+# Game Logic
+# ---------------------------------------------------
+def resolve_single(player_choice):
+    pass
+
+def resolve_multi(p1, p2):
+    pass
+
+# ---------------------------------------------------
+# Key Handling 
+# ---------------------------------------------------
 def handle_key(event):
-    
-    if mode_var.get() == "Single-Player":
-
-        if event.keysym == "a":
-            pass
-
-        elif event.keysym == "s":
-            pass
-
-        elif event.keysym == "d":
-            pass
-    
-    elif mode_var.get() == "Multi-Player":
-        
-        if event.keysym == "a":
-            pass
-
-        elif event.keysym == "s":
-            pass
-
-        elif event.keysym == "d":
-            pass
-
-        elif event.keysym == "j":
-            pass
-
-        elif event.keysym == "k":
-            pass
-
-        elif event.keysym == "l":
-            pass
-        
-
-# ---------------------------------------------------
-# GAME LOGIC
-# ---------------------------------------------------
-# nothing yet 😭
+    pass
 
 # ---------------------------------------------------
 # START/RESTART GAME
@@ -98,9 +109,10 @@ def build_menu_frame(parent):
 
     global mode_var
 
-    frame = Frame(parent, 
-                  bg= "#0a0a0a",
-                  )
+    frame = Frame(
+        parent, 
+        bg= "#0a0a0a"
+        )
     
     Label(
         frame,
@@ -219,9 +231,11 @@ def build_game_frame(parent):
         cursor="hand2",
         command=go_to_menu
     )
-    menu_button.pack(side=LEFT,
-                     padx=6,
-                     pady=4)
+    menu_button.pack(
+        side=LEFT,
+        padx=6,
+        pady=4
+    )
     
     # Score label at top right
     score_label = Label(
@@ -273,6 +287,9 @@ def main():
     window.resizable(False, False)
     window.configure(bg="#000000")
 
+    # Prevents for both rediobuttons from being selected manually
+    mode_var = StringVar(value="Single-Player")
+
     container = Frame(window, bg="#000000")
     container.pack(fill=BOTH, expand=True) 
     # fill=BOTH  --> "Stretch horizontally and vertically to fill any available space."
@@ -291,7 +308,7 @@ def main():
     show_frame(menu_frame)
 
     # Key bindings 
-    window.bind("<Escape>", lambda e: show_frame(menu_frame))
+    window.bind("<Escape>", lambda e: go_to_menu())
     window.bind("a", handle_key)
     window.bind("s", handle_key)
     window.bind("d", handle_key)
