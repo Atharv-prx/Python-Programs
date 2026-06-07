@@ -354,7 +354,7 @@ def handle_key(event):
             resolve_single(choice)
 
         elif game_state == "result":
-            # Choice key from result: go straight into next round
+
             game_state = "waiting"
             draw_waiting()
             resolve_single(choice)
@@ -412,10 +412,10 @@ def handle_key(event):
                         fill="#ff9900",
                         tags="p2_status"
                     )
-                    # store p2 choice so when p1 presses we can resolve
+                    # store p2 choice so when p1 presses i can resolve
                     handle_key._p2_pending = p2_choice
 
-            # Check if we had a stored p2 and now p1 just pressed
+            # Check if we had a stored p2 and now p1 just presed
             if key in p1_keys and hasattr(handle_key, "_p2_pending"):
                 resolve_multi(KEY_MAP[key], handle_key._p2_pending)
                 del handle_key._p2_pending
@@ -484,7 +484,6 @@ def build_menu_frame(parent):
         bg= "#0a0a0a"
     ).pack(pady=(0,40))
     
-    # Mode selection
     Label(
         frame,
         text= "Choose mode",
@@ -513,7 +512,6 @@ def build_menu_frame(parent):
         ).pack(anchor="w",
                pady=3)
     
-    # Start Button 
     start_button = Button(
         frame,
         text="▶  START GAME",
@@ -530,7 +528,6 @@ def build_menu_frame(parent):
     )
     start_button.pack()
     
-    # keybind description
     Label(
         frame,
         text=(
@@ -546,7 +543,6 @@ def build_menu_frame(parent):
         bg="#0a0a0a",
     ).pack()
 
-    # Sublte Footer
     Label(
         frame, 
         text="Feel free to give me ideas about improving this program :)",
@@ -559,18 +555,15 @@ def build_menu_frame(parent):
 
 def build_game_frame(parent):
     
-    # Score label + canvas + hidden restart button + menu button 
     global canvas, score_label, restart_button 
 
     frame = Frame(parent,
                   bg= "#000000")
     
-    # This bar would contain menu button and score label
     top_bar = Frame(frame, 
                     bg="#111111")
     top_bar.pack(fill=X)
     
-    # Menu button at top left
     menu_button = Button(
         top_bar,
         text="MENU",
@@ -591,7 +584,6 @@ def build_game_frame(parent):
         pady=4
     )
     
-    # Score label at top right
     score_label = Label(
         top_bar,
         text="Score: 0",
@@ -603,7 +595,6 @@ def build_game_frame(parent):
                      padx=16, 
                      pady=4)
     
-    # Canvas
     canvas = Canvas(
         frame,
         bg=BACKGROUND_COLOR,
@@ -612,8 +603,7 @@ def build_game_frame(parent):
         highlightthickness=0
     )
     canvas.pack()
-
-    # Hidden restart button 
+ 
     restart_button = Button(
         canvas,
         text="Restart",
@@ -641,17 +631,14 @@ def main():
     window.resizable(False, False)
     window.configure(bg="#000000")
 
-    # Prevents both radiobuttons from being selected simultaneously at start
+    # One of the bug fixes that i encountered, basically prevents both radiobutons to be enabled at same time
     mode_var = StringVar(value="Single-Player")
 
     container = Frame(window, bg="#000000")
     container.pack(fill=BOTH, expand=True) 
-    # fill=BOTH  --> "Stretch horizontally and vertically to fill any available space."
-    # expand = True --> "If the window gets larger, give the extra space to this widget."
 
     container.grid_rowconfigure(0, weight=1)
     container.grid_columnconfigure(0, weight=1)
-    # grid_****configure basically means that "This row/column is allowed to expand."
 
     menu_frame = build_menu_frame(container)
     game_frame = build_game_frame(container)
@@ -661,7 +648,6 @@ def main():
     
     show_frame(menu_frame)
 
-    # Key bindings 
     window.bind("<Escape>", lambda e: go_to_menu())
     window.bind("a", handle_key)
     window.bind("s", handle_key)
