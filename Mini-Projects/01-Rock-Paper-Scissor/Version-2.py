@@ -196,10 +196,19 @@ def draw_result_multi(p1_choice, p2_choice, outcome):
     )
 
 def _draw_border():
-    pass
+    pad = 20
+    canvas.create_rectangle(
+        pad, pad, GAME_WIDTH - pad, GAME_HEIGHT - pad,
+        outline="#00FF00", width=1, dash=(6, 4)
+    )
 
 def _outcome_style(outcome):
-    pass
+    if outcome == "win":
+        return "#00FF00", "YOU WIN!"
+    elif outcome == "lose":
+        return "#FF4444", "YOU LOSE!"
+    else:
+        return "#ffff00", "DRAW!"
 
 # ---------------------------------------------------
 # Game Logic
