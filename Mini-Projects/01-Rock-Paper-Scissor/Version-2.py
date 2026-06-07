@@ -14,6 +14,12 @@ window = None
 mode_var = None
 
 # ---------------------------------------------------
+# Frame switching 
+# ---------------------------------------------------
+def show_frame(frame):
+    frame.tkraise()
+
+# ---------------------------------------------------
 # START/RESTART GAME
 # ---------------------------------------------------
 def start_game():
@@ -189,9 +195,30 @@ def main():
     window.title("Rock Paper Scissors")
     window.resizable(False, False)
     window.configure(bg="#000000")
+
+    container = Frame(window, bg="#000000")
+    container.pack(fill=BOTH, expand=True) 
+    # fill=BOTH  --> "Stretch horizontally and vertically to fill any available space."
+    # expand = True --> "If the window gets larger, give the extra space to this widget."
+
+    container.grid_rowconfigure(0, weight=1)
+    container.grid_columnconfigure(0, weight=1)
+    # grid_****configure basically means that "This row/column is allowed to expand."
+
+    menu_frame = build_menu_frame(container)
+    game_frame = build_game_frame(container)
+
+    for frame in (menu_frame, game_frame):
+        frame.grid(row=0, column=0, sticky= 'nsew')
     
-    menu_frame = build_menu_frame(window)
-    menu_frame.pack(padx=20, pady=20)
+    show_frame(menu_frame)
+
+    # Center window
+    window.update()
+    w, h = window.winfo_width(), window.winfo_height()
+    sw, sh = window.winfo_screenwidth(), window.winfo_screenheight()
+    window.geometry(f"{w}x{h}+{(sw-w)//2}+{(sh-h)//2}")
+    # width x height + x_position + y_position
 
     window.mainloop()
 
