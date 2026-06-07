@@ -1,4 +1,5 @@
 from tkinter import *
+import random
 
 # ---------------------------------------------------
 # CONSTANTS
@@ -190,7 +191,7 @@ def draw_result_multi(p1_choice, p2_choice, outcome):
 
     canvas.create_text(
         GAME_WIDTH // 2, GAME_HEIGHT - 60,
-        text="Press Enter for next round  (or any key to pick immediately)",
+        text="Press Enter for next round  (or A/S/D/J/K/L to pick immediately)",
         font=("Consolas", 13),
         fill="#3a7a3a"
     )
@@ -214,10 +215,40 @@ def _outcome_style(outcome):
 # Game Logic
 # ---------------------------------------------------
 def resolve_single(player_choice):
-    pass
+    global player_1_score, computer_score, game_state
+
+    comp_choice = random.choice(CHOICES)
+
+    if player_choice == comp_choice:
+        outcome = "draw"
+
+    elif WINS_AGAINST[player_choice] == comp_choice:
+        outcome = "win"
+        player_1_score += 1
+
+    else:
+        outcome = "lose"
+        computer_score += 1
+    
+    score_label.config(text=f"Score: {player_1_score}")
+    game_state = "result"
+    draw_result_single(player_choice, comp_choice, outcome)
 
 def resolve_multi(p1, p2):
-    pass
+    global player_1_score, player_2_score, game_state
+
+    if p1 == p2:
+        outcome = "draw"
+    elif WINS_AGAINST[p1] == p2:
+        outcome = "p1"
+        player_1_score += 1
+    else:
+        outcome = "p2"
+        player_2_score += 1
+
+    score_label.config(text=f"P1: {player_1_score}   P2: {player_2_score}")
+    game_state = "result"
+    draw_result_multi(p1, p2, outcome)
 
 # ---------------------------------------------------
 # Key Handling 
