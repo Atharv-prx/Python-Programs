@@ -11,6 +11,7 @@ BACKGROUND_COLOR = "#000000"
 # GLOBALS
 # ---------------------------------------------------
 window              = None
+canvas              = None
 mode_var            = None
 score_label         = None
 restart_button      = None
@@ -22,10 +23,44 @@ player_2_choice     = None
 computer_choice     = None
 
 # ---------------------------------------------------
-# Frame switching 
+# Helpers 
 # ---------------------------------------------------
 def show_frame(frame):
     frame.tkraise()
+
+def handle_key(event):
+    
+    if mode_var.get() == "Single-Player":
+
+        if event.keysym == "a":
+            pass
+
+        elif event.keysym == "s":
+            pass
+
+        elif event.keysym == "d":
+            pass
+    
+    elif mode_var.get() == "Multi-Player":
+        
+        if event.keysym == "a":
+            pass
+
+        elif event.keysym == "s":
+            pass
+
+        elif event.keysym == "d":
+            pass
+
+        elif event.keysym == "j":
+            pass
+
+        elif event.keysym == "k":
+            pass
+
+        elif event.keysym == "l":
+            pass
+        
 
 # ---------------------------------------------------
 # GAME LOGIC
@@ -255,7 +290,15 @@ def main():
     
     show_frame(menu_frame)
 
-    # Key bindings in future here
+    # Key bindings 
+    window.bind("<Escape>", lambda e: show_frame(menu_frame))
+    window.bind("a", handle_key)
+    window.bind("s", handle_key)
+    window.bind("d", handle_key)
+
+    window.bind("j", handle_key)
+    window.bind("k", handle_key)
+    window.bind("l", handle_key)
 
     # Center window
     window.update()
