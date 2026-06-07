@@ -76,7 +76,90 @@ def resolve_multi(p1, p2):
 # Key Handling 
 # ---------------------------------------------------
 def handle_key(event):
-    pass
+
+    global game_state, p1_choice_pending
+
+    # Only handle keys when on game frame
+    if get_mode() == "Single-Player":
+
+        if event.keysym == "Return":
+
+            if game_state == "result":
+                game_state = "waiting"
+                draw_waiting()
+            return
+
+        choice = KEY_MAP.get(event.keysym)
+        if choice is None:
+            return
+
+        if game_state == "waiting":
+            resolve_single(choice)
+        elif game_state == "result":
+            # Choice key from result: go straight into next round
+            game_state = "waiting"
+            draw_waiting()
+            resolve_single(choice)
+
+    elif get_mode() == "Multi-Player":
+        p1_keys = {"a", "s", "d"}
+        p2_keys = {"j", "k", "l"}
+        key = event.keysym
+
+        if key == "Return":
+            if game_state == "result":
+                game_state = "waiting"
+                p1_choice_pending = None
+                draw_waiting()
+            return
+
+        if game_state == "result":
+            # Any game key resets to waiting, then falls through to register choice
+            game_state = "waiting"
+            p1_choice_pending = None
+            draw_waiting()
+
+        if game_state == "waiting":
+            if key in p1_keys:
+                p1_choice_pending = KEY_MAP[key]
+                # Update canvas to show P1 has locked in
+                canvas.delete("p1_status")
+                canvas.create_text(
+                    GAME_WIDTH // 2, 200,
+                    text=f"Player 1: LOCKED IN ✓",
+                    font=("Consolas", 16),
+                    fill="#00ccff",
+                    tags="p1_status"
+                )
+                if p1_choice_pending and _p2_locked:
+                    pass   # handled below
+
+            elif key in p2_keys:
+                p2_choice = KEY_MAP[key]
+                if p1_choice_pending is not None:
+                    resolve_multi(p1_choice_pending, p2_choice)
+                    p1_choice_pending = None
+                else:
+                    # P2 pressed before P1 — store temporarily via tag
+                    canvas.delete("p2_status")
+                    canvas.create_text(
+                        GAME_WIDTH // 2, 260,
+                        text=f"Player 2: LOCKED IN ✓",
+                        font=("Consolas", 16),
+                        fill="#ff9900",
+                        tags="p2_status"
+                    )
+                    # store p2 choice so when p1 presses we can resolve
+                    handle_key._p2_pending = p2_choice
+
+            # Check if we had a stored p2 and now p1 just pressed
+            if key in p1_keys and hasattr(handle_key, "_p2_pending"):
+                resolve_multi(KEY_MAP[key], handle_key._p2_pending)
+                del handle_key._p2_pending
+                p1_choice_pending = None
+
+# Sentinel used above (cleaner than another global)
+_p2_locked = False
 
 # ---------------------------------------------------
 # START/RESTART GAME
@@ -89,15 +172,21 @@ def restart_game():
     _launch_game()
 
 def _launch_game():
-    global score
+    global player_1_score, player_2_score, computer_score, game_state, p1_choice_pending
 
-    score = 0
+    player_1_score    = 0
+    player_2_score    = 0
+    computer_score    = 0
+    game_state        = "waiting"
+    p1_choice_pending = None
 
-    score_label.config(text=f"Score: {score}")
-
-    canvas.delete("all")
+    if get_mode() == "Single-Player":
+        score_label.config(text="Score: 0")
+    else:
+        score_label.config(text="P1: 0   P2: 0")
 
     restart_button.place_forget()
+    draw_waiting()
 
 def go_to_menu():
     show_frame(menu_frame)
@@ -268,7 +357,8 @@ def build_game_frame(parent):
         bg="#00FF00",
         activebackground="#00cc00",
         relief=FLAT,
-        padx=20, pady=8,
+        padx=20, 
+        pady=8,
         cursor="hand2",
         command=restart_game
     )
@@ -287,7 +377,7 @@ def main():
     window.resizable(False, False)
     window.configure(bg="#000000")
 
-    # Prevents for both rediobuttons from being selected manually
+    # Prevents both radiobuttons from being selected simultaneously at start
     mode_var = StringVar(value="Single-Player")
 
     container = Frame(window, bg="#000000")
@@ -316,6 +406,7 @@ def main():
     window.bind("j", handle_key)
     window.bind("k", handle_key)
     window.bind("l", handle_key)
+    window.bind("<Return>", handle_key)
 
     # Center window
     window.update()
